@@ -6,7 +6,8 @@
   "author": "Brendan Asselstine <brendan@pooltogether.com>",
   "license": "MIT",
   "scripts": {
-    "generate": "./generate.sh"
+    "generate": "./index.js",
+    "generate-and-push": "./generate.sh"
   },
   "dependencies": {
     "@pooltogether/current-pool-data": "^3.0.0-alpha.40",

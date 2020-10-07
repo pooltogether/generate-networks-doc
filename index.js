@@ -23,7 +23,11 @@ const ignoreContracts = [
   'SingleRandomWinnerProxyFactory',
   'TicketProxyFactory',
   'yVaultPrizePoolProxyFactory',
-  'StakePrizePoolProxyFactory'
+  'StakePrizePoolProxyFactory',
+  'MultipleWinnersProxyFactory',
+  'ComptrollerImplementation',
+  'ProxyAdmin',
+  'ProxyFactory'
 ]
 
 const baseUrl = "https://github.com/pooltogether/pooltogether-pool-contracts/tree/version-3"
@@ -47,6 +51,8 @@ async function generate() {
 
   append(`# 📡 Networks`)
   append(``)
+  append(`*This document was generated [automatically](https://github.com/pooltogether/generate-networks-doc)*`)
+  append(``)
 
   for (let ni = 0; ni < networks.length; ni++) {
     const network = networks[ni]
@@ -66,7 +72,7 @@ async function generate() {
         const poolName = poolNames[npi]
         const pool = contractAddresses[chainId][poolName]
         appendNoNewline(`| `)
-        appendNoNewline(`[${poolName}](${baseUrl + '/contracts/prize-pool/PrizePool.sol'})`)
+        appendNoNewline(`[${poolName.toUpperCase()}](${baseUrl + '/contracts/prize-pool/PrizePool.sol'})`)
         appendNoNewline(` ([open app](https://staging-v3.pooltogether.com))`)
         append(` | [${pool.prizePool}](https://${name}.etherscan.io/address/${pool.prizePool}) | [ABI](/.gitbook/assets/prizepoolabi.json) |`)
       }
@@ -104,10 +110,6 @@ async function generate() {
     append('')
   }
   
-  append('')
-  append('')
-  append('')
-  append(`*This document was generated using a [script](${baseUrl + `scripts/generateDeploymentMarkdown.js`})*`)
   append('')
   
   fs.closeSync(out)  
