@@ -1,0 +1,16 @@
+{
+  "name": "generate-network-docs",
+  "version": "0.1.0",
+  "description": "Generates a markdown page for the PoolTogether contracts",
+  "main": "index.js",
+  "author": "Brendan Asselstine <brendan@pooltogether.com>",
+  "license": "MIT",
+  "scripts": {
+    "generate": "./generate.sh"
+  },
+  "dependencies": {
+    "@pooltogether/current-pool-data": "^3.0.0-alpha.40",
+    "@pooltogether/pooltogether-contracts": "^3.0.0-alpha.41",
+    "find": "^0.3.0"
+  }
+}
