@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
-const path = require('path')
 const chalk = require('chalk')
-const glob = require('glob')
-const find = require('find')
+
+const { formatDeployments } = require('./formatDeployments')
 
 const networks = [
   {
@@ -14,14 +13,21 @@ const networks = [
   {
     chainId: '3',
     name: 'ropsten'
+  },
+  {
+    chainId: '42',
+    name: 'kovan'
   }
 ]
+
+const packageJson = require('./package.json')
 
 const ignoreContracts = [
   'CompoundPrizePoolProxyFactory',
   'ControlledTokenProxyFactory',
   'SingleRandomWinnerProxyFactory',
   'TicketProxyFactory',
+  'Link',
   'yVaultPrizePoolProxyFactory',
   'StakePrizePoolProxyFactory',
   'MultipleWinnersProxyFactory',
@@ -30,7 +36,6 @@ const ignoreContracts = [
   'ProxyFactory'
 ]
 
-const baseUrl = "https://github.com/pooltogether/pooltogether-pool-contracts/tree/version-3"
 const outputFile = `./Networks.md`
 
 const { contractAddresses } = require('@pooltogether/current-pool-data')
@@ -63,8 +68,15 @@ async function generate() {
     append(`## ${capitalizeFirstLetter(name)}`)
     append('')
 
-    append(`| Contract | Address | Artifact |`)
-    append(`| :--- | :--- | :--- |`)
+    const newContractSection = () => {
+      append(`| Contract | Address | Artifact |`)
+      append(`| :--- | :--- | :--- |`)
+    }
+    
+    const poolTogetherContractBaseUrl = "https://github.com/pooltogether/pooltogether-pool-contracts/tree/version-3"
+
+    append(`### [@pooltogether/current-pool-data](https://www.npmjs.com/package/@pooltogether/current-pool-data) ${packageJson.dependencies['@pooltogether/current-pool-data']}`)
+    newContractSection()
 
     if (contractAddresses[chainId]) {
       const poolNames = Object.keys(contractAddresses[chainId])
@@ -72,41 +84,29 @@ async function generate() {
         const poolName = poolNames[npi]
         const pool = contractAddresses[chainId][poolName]
         appendNoNewline(`| `)
-        appendNoNewline(`[${poolName.toUpperCase()}](${baseUrl + '/contracts/prize-pool/PrizePool.sol'})`)
+        appendNoNewline(`[${poolName.toUpperCase()}](${poolTogetherContractBaseUrl + '/contracts/prize-pool/PrizePool.sol'})`)
         appendNoNewline(` ([open app](https://staging-v3.pooltogether.com))`)
         append(` | [${pool.prizePool}](https://${name}.etherscan.io/address/${pool.prizePool}) | [ABI](/.gitbook/assets/prizepoolabi.json) |`)
       }
     }
+    append('')
 
-    const poolTogetherRoot = `${__dirname}/node_modules/@pooltogether/pooltogether-contracts/`
-    const networksGlob = `${poolTogetherRoot}/deployments/${name}/*.json`
-    const contractPaths = glob.sync(networksGlob)
+    append(`### [@pooltogether/pooltogether-contracts](https://www.npmjs.com/package/@pooltogether/pooltogether-contracts) ${packageJson.dependencies['@pooltogether/pooltogether-contracts']}`)
+    newContractSection()
+    append(formatDeployments({ npmPackageName: '@pooltogether/pooltogether-contracts', ignoreContracts, networkName: name, githubBaseUrl: poolTogetherContractBaseUrl }).join('\n'))
+    append('')
+    
+    append(`### [@pooltogether/pooltogether-rng-contracts](https://www.npmjs.com/package/@pooltogether/pooltogether-rng-contracts) ${packageJson.dependencies['@pooltogether/pooltogether-rng-contracts']}`)
+    newContractSection()
+    append(formatDeployments({
+      npmPackageName: '@pooltogether/pooltogether-rng-contracts',
+      ignoreContracts,
+      networkName: name,
+      githubBaseUrl: "https://github.com/pooltogether/pooltogether-rng-contracts/tree/master"
+    }).join('\n'))
+    append('')
   
-    for (let cpi = 0; cpi < contractPaths.length; cpi++) {
-      const contractPath = contractPaths[cpi]
-  
-      const contract = JSON.parse(fs.readFileSync(contractPath))
-      const contractName = path.basename(contractPath, ".json")
-  
-      if (!ignoreContracts.includes(contractName)) {
-        console.log(chalk.dim(`Found contract ${contractName}...`))
-  
-        const solidityFilepaths = find.fileSync(`${contractName}.sol`, `${poolTogetherRoot}/contracts`)
-        let contractLink
-        if (solidityFilepaths.length > 0) {
-          const solidityFilePath = solidityFilepaths[0].split("/contracts")[1]
-          contractLink = `[${contractName}](${baseUrl}/contracts${solidityFilePath})`
-        } else {
-          contractLink = contractName
-        }
-  
-        append(`| ${contractLink} | [${contract.address}](https://${network}.etherscan.io/address/${contract.address}) | [Artifact](${baseUrl + `/deployments/${network}/${path.basename(contractPath)}`}) |`)
-      } else {
-        console.log(chalk.dim(`Ignoring contract ${contractName}`))
-      }
-    }
-  
-    console.log(chalk.green(`Done ${network}!`))
+    console.log(chalk.green(`Done ${name}!`))
     append('')
   }
   
