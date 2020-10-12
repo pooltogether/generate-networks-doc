@@ -363,11 +363,6 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-3.2.0.tgz#3e6b3a7662d8ed64271ade96ef42655db983fd9d"
   integrity sha512-bUOmkSoPkjnUyMiKo6RYnb0VHBk5D9KKDAgNLzF41aqAM3TeE0yGdFF5dVRcV60pZdJLlyFT/jjXIZCWyyEzAQ==
 
-"@pooltogether/current-pool-data@^3.0.0-alpha.33":
-  version "3.0.0-alpha.33"
-  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.0.0-alpha.33.tgz#d873e581148181d9d2ec0c7ef5b6cb9669bd419d"
-  integrity sha512-65L1gz+fGXDJ4z5LRnLnHQ+ogcL6cI/wjiSmOalJeTEt6aMrl9O0fMXI6gbAEi+n8iobrF62bkuBxCqU8OlMtQ==
-
 "@pooltogether/current-pool-data@^3.0.0-alpha.40":
   version "3.0.0-alpha.40"
   resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.0.0-alpha.40.tgz#31079fd4cd7d3bbb124d6e430d175e41e35e357c"
@@ -379,14 +374,13 @@
   dependencies:
     "@openzeppelin/contracts-ethereum-package" "^3.0.0"
 
-"@pooltogether/pooltogether-contracts@^3.0.0-alpha.41":
-  version "3.0.0-alpha.41"
-  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.0.0-alpha.41.tgz#4b4cca39c74a7f1dd3f352650ceb181ef3a8e83e"
-  integrity sha512-Jbxc7A8Nnh95yPBkF2UuhIdsxJK/48tZwdovKEWS1iRtTWBHXDbdjiJJsUwmGg2sZ3BkV5ynl4PaqmBsKlN3XQ==
+"@pooltogether/pooltogether-contracts@^3.0.0-alpha.42":
+  version "3.0.0-alpha.42"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.0.0-alpha.42.tgz#e0b5e35def86c37947cf2c6827345d5dc2cb1621"
+  integrity sha512-9vETLUXwADrsmEaZza2JrOtZMZpr3DpkraKpWQYRMpL17XQZrBBi5bLFm9mL7ev0HJGrpNEAK4Rpd3b7OYGXgQ==
   dependencies:
     "@opengsn/gsn" "^2.0.1"
     "@openzeppelin/contracts-ethereum-package" "3.0.0"
-    "@pooltogether/current-pool-data" "^3.0.0-alpha.33"
     "@pooltogether/fixed-point" pooltogether/fixed-point.git#0.1.0-upgradeable.1
     "@pooltogether/pooltogether-rng-contracts" "^1.0.0-alpha.7"
     "@pooltogether/uniform-random-number" pooltogether/uniform-random-number#solidity-0.6
