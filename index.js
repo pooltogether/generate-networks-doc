@@ -13,10 +13,6 @@ const networks = [
   {
     chainId: '3',
     name: 'ropsten'
-  },
-  {
-    chainId: '42',
-    name: 'kovan'
   }
 ]
 
