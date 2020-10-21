@@ -7,6 +7,10 @@ const { formatDeployments } = require('./formatDeployments')
 
 const networks = [
   {
+    chainId: '1',
+    name: 'mainnet'
+  },
+  {
     chainId: '4',
     name: 'rinkeby'
   },
