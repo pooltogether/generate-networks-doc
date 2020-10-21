@@ -65,6 +65,13 @@ async function generate() {
 
     console.log(chalk.yellow(`Generating network ${name}...`))
   
+    let etherscanBaseUrl
+    if (name == 'mainnet' || name == 'homestead') {
+      etherscanBaseUrl = `https://etherscan.io`
+    } else {
+      etherscanBaseUrl = `https://${name}.etherscan.io`
+    }
+
     append(`## ${capitalizeFirstLetter(name)}`)
     append('')
 
@@ -86,7 +93,7 @@ async function generate() {
         appendNoNewline(`| `)
         appendNoNewline(`[${poolName.toUpperCase()}](${poolTogetherContractBaseUrl + '/contracts/prize-pool/PrizePool.sol'})`)
         appendNoNewline(` ([open app](https://staging-v3.pooltogether.com))`)
-        append(` | [${pool.prizePool}](https://${name}.etherscan.io/address/${pool.prizePool}) | [ABI](/.gitbook/assets/prizepoolabi.json) |`)
+        append(` | [${pool.prizePool}](${etherscanBaseUrl}/address/${pool.prizePool}) | [ABI](/.gitbook/assets/prizepoolabi.json) |`)
       }
     }
     append('')
