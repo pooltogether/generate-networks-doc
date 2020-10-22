@@ -30,6 +30,7 @@ const ignoreContracts = [
   'Link',
   'yVaultPrizePoolProxyFactory',
   'StakePrizePoolProxyFactory',
+  'PermitAndDepositDai',
   'MultipleWinnersProxyFactory',
   'ComptrollerImplementation',
   'ProxyAdmin',
