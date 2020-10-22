@@ -11,6 +11,13 @@ function formatDeployments({ npmPackageName, ignoreContracts, networkName, githu
   const deploymentsGlob = `${projectRoot}/deployments/${networkName}/*.json`
   const contractPaths = glob.sync(deploymentsGlob)
 
+  let etherscanBaseUrl
+  if (networkName == 'mainnet' || networkName == 'homestead') {
+    etherscanBaseUrl = `https://etherscan.io`
+  } else {
+    etherscanBaseUrl = `https://${networkName}.etherscan.io`
+  }
+
   for (let cpi = 0; cpi < contractPaths.length; cpi++) {
     const contractPath = contractPaths[cpi]
 
@@ -29,7 +36,7 @@ function formatDeployments({ npmPackageName, ignoreContracts, networkName, githu
         contractLink = contractName
       }
 
-      result.push(`| ${contractLink} | [${contract.address}](https://${networkName}.etherscan.io/address/${contract.address}) | [Artifact](${githubBaseUrl + `/deployments/${networkName}/${path.basename(contractPath)}`}) |`)
+      result.push(`| ${contractLink} | [${contract.address}](${etherscanBaseUrl}/address/${contract.address}) | [Artifact](${githubBaseUrl + `/deployments/${networkName}/${path.basename(contractPath)}`}) |`)
     } else {
       console.log(chalk.dim(`Ignoring contract ${contractName}`))
     }
