@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@pooltogether/current-pool-data": "^3.0.1",
-    "@pooltogether/pooltogether-contracts": "^3.0.0",
+    "@pooltogether/pooltogether-contracts": "^3.0.1",
     "@pooltogether/pooltogether-rng-contracts": "^1.0.0",
     "find": "^0.3.0"
   }
