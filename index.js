@@ -38,7 +38,6 @@ const ignoreContracts = [
 
 const outputFile = `./Networks.md`
 
-const { contractAddresses } = require('@pooltogether/current-pool-data')
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -82,9 +81,10 @@ async function generate() {
     
     const poolTogetherContractBaseUrl = "https://github.com/pooltogether/pooltogether-pool-contracts/tree/version-3"
 
+
     append(`### [@pooltogether/current-pool-data](https://www.npmjs.com/package/@pooltogether/current-pool-data) ${packageJson.dependencies['@pooltogether/current-pool-data']}`)
     newContractSection()
-
+    const { contractAddresses } = require('@pooltogether/current-pool-data')
     if (contractAddresses[chainId]) {
       const poolNames = Object.keys(contractAddresses[chainId])
       for (let npi = 0; npi < poolNames.length; npi++) {
@@ -98,11 +98,13 @@ async function generate() {
     }
     append('')
 
+
     append(`### [@pooltogether/pooltogether-contracts](https://www.npmjs.com/package/@pooltogether/pooltogether-contracts) ${packageJson.dependencies['@pooltogether/pooltogether-contracts']}`)
     newContractSection()
     append(formatDeployments({ npmPackageName: '@pooltogether/pooltogether-contracts', ignoreContracts, networkName: name, githubBaseUrl: poolTogetherContractBaseUrl }).join('\n'))
     append('')
     
+
     append(`### [@pooltogether/pooltogether-rng-contracts](https://www.npmjs.com/package/@pooltogether/pooltogether-rng-contracts) ${packageJson.dependencies['@pooltogether/pooltogether-rng-contracts']}`)
     newContractSection()
     append(formatDeployments({
@@ -112,7 +114,21 @@ async function generate() {
       githubBaseUrl: "https://github.com/pooltogether/pooltogether-rng-contracts/tree/master"
     }).join('\n'))
     append('')
-  
+
+    let migrateDeployments = formatDeployments({
+      npmPackageName: '@pooltogether/migrate-v3',
+      ignoreContracts,
+      networkName: name,
+      githubBaseUrl: "https://github.com/pooltogether/pooltogether-migrate-v3/tree/master"
+    })
+
+    if (migrateDeployments.length) {
+      append(`### [@pooltogether/migrate-v3](https://github.com/pooltogether/pooltogether-migrate-v3) ${packageJson.dependencies['@pooltogether/migrate-v3']}`)
+      newContractSection()
+      append(migrateDeployments)
+      append('')
+    }
+    
     console.log(chalk.green(`Done ${name}!`))
     append('')
   }
