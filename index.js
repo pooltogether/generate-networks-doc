@@ -125,7 +125,7 @@ async function generate() {
     if (migrateDeployments.length) {
       append(`### [@pooltogether/migrate-v3](https://github.com/pooltogether/pooltogether-migrate-v3) ${packageJson.dependencies['@pooltogether/migrate-v3']}`)
       newContractSection()
-      append(migrateDeployments)
+      append(migrateDeployments.join('\n'))
       append('')
     }
 
@@ -139,7 +139,7 @@ async function generate() {
     if (lootBoxDeployments.length) {
       append(`### [@pooltogether/loot-box](https://github.com/pooltogether/pooltogether-loot-box) ${packageJson.dependencies['@pooltogether/loot-box']}`)
       newContractSection()
-      append(lootBoxDeployments)
+      append(lootBoxDeployments.join('\n'))
       append('')
     }
     
