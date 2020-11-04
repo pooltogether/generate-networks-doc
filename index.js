@@ -128,6 +128,20 @@ async function generate() {
       append(migrateDeployments)
       append('')
     }
+
+    let lootBoxDeployments = formatDeployments({
+      npmPackageName: '@pooltogether/loot-box',
+      ignoreContracts,
+      networkName: name,
+      githubBaseUrl: "https://github.com/pooltogether/loot-box/tree/main"
+    })
+
+    if (lootBoxDeployments.length) {
+      append(`### [@pooltogether/loot-box](https://github.com/pooltogether/pooltogether-loot-box) ${packageJson.dependencies['@pooltogether/loot-box']}`)
+      newContractSection()
+      append(lootBoxDeployments)
+      append('')
+    }
     
     console.log(chalk.green(`Done ${name}!`))
     append('')
