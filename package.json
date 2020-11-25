@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@pooltogether/current-pool-data": "^3.0.1",
-    "@pooltogether/loot-box": "^1.0.0-beta.2",
+    "@pooltogether/loot-box": "^1.0.0-beta.4",
     "@pooltogether/migrate-v3": "^0.1.3",
     "@pooltogether/pooltogether-contracts": "^3.0.1",
     "@pooltogether/pooltogether-rng-contracts": "^1.0.0",
