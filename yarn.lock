@@ -374,10 +374,10 @@
   dependencies:
     "@openzeppelin/contracts-ethereum-package" "^3.0.0"
 
-"@pooltogether/loot-box@^1.0.0-beta.4":
-  version "1.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@pooltogether/loot-box/-/loot-box-1.0.0-beta.4.tgz#62a1803b5f64ad1cdbc9e391b2f930a748d886ce"
-  integrity sha512-MCA9MwPaSwHVrergMaCJd8gcDhO1gM9erJ1jcCUZ+Fa3ewhQozEerVaMzs++2BkBq5LNOlX1usLegC8I6Dd/Ag==
+"@pooltogether/loot-box@^1.0.0-beta.5":
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@pooltogether/loot-box/-/loot-box-1.0.0-beta.5.tgz#e8bda6a569251307a588f991b89aa0c9428702ef"
+  integrity sha512-ArgobcpduHJ8kv2Pes0TX7e63/jCTuaTOYY3BBc3lwtMkwSuzA/aQdk4kpViel3bKBqpy/+bwT8fZR7pL5xYLQ==
   dependencies:
     "@openzeppelin/contracts" "^3.2.0"
     ganache-cli "^6.12.0"
