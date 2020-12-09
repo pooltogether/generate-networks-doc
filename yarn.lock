@@ -297,7 +297,7 @@
     "@types/web3" "^1.2.2"
     web3 "1.2.6"
 
-"@opengsn/gsn@^2.0.1":
+"@opengsn/gsn@2.0.1", "@opengsn/gsn@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@opengsn/gsn/-/gsn-2.0.1.tgz#bf77894257d8d0015948215a3ba4759d085873e1"
   integrity sha512-AHEU2SOYTxXiTlLtFGpF0p3S6mflPb1ajh4zvQPv890RNsXMqc9U3VsZ5q6HZXpooE7HOkEUHrQtqgT0rJdXGA==
@@ -358,6 +358,11 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts-ethereum-package/-/contracts-ethereum-package-3.0.0.tgz#d5db971a177c3b37733db2ee4ebdb79c67575d64"
   integrity sha512-Xg33RtX7FGbSK/YnroLhcGNAvH30/C84NRW8KvbSdXXYiLA8YqM1bOA9sAeLjmQxXqYUn/YL4AUVTgDnG51NOw==
 
+"@openzeppelin/contracts-upgradeable@3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts-upgradeable/-/contracts-upgradeable-3.3.0.tgz#a536c6ff107d21319490e6cb699e555a3edcf6ea"
+  integrity sha512-kJeNuKauR4xH52Yo3GdXXAOW4CWyWdm7VXcJFe63G8TRb45ISSnkt/gXwUa8zzEYqokQrwNZYoH/iGYfUlp6wA==
+
 "@openzeppelin/contracts@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-3.2.0.tgz#3e6b3a7662d8ed64271ade96ef42655db983fd9d"
@@ -368,18 +373,24 @@
   resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.0.1.tgz#2cab2078d7df4551fb3074fbcb5c81787f9911cf"
   integrity sha512-NB4TopoQy/k4xw6RpZopmyxmeYSh8XzU+q9AXLaLKYY9fKwwpbrsk9ZhhzPWX88qm2+grF9AHRq6/+7hcjxrXA==
 
+"@pooltogether/fixed-point@1.0.0-beta.2":
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@pooltogether/fixed-point/-/fixed-point-1.0.0-beta.2.tgz#d76a1e77f21833e9b680296d65526b0ffd7415d7"
+  integrity sha512-aUw4R0Z2oM0AK3W4LIXyBaojTOzRRbhLDHX0egeuvxfjy4gBb6X66v81gI7Wngg/7O0y9QL/B8jWkUnAFzhTig==
+
 "@pooltogether/fixed-point@pooltogether/fixed-point.git#0.1.0-upgradeable.1":
   version "0.1.0"
   resolved "https://codeload.github.com/pooltogether/fixed-point/tar.gz/422e81ae8025680b870c7242ea9c01df72d72baf"
   dependencies:
     "@openzeppelin/contracts-ethereum-package" "^3.0.0"
 
-"@pooltogether/loot-box@^1.0.0-beta.5":
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@pooltogether/loot-box/-/loot-box-1.0.0-beta.5.tgz#e8bda6a569251307a588f991b89aa0c9428702ef"
-  integrity sha512-ArgobcpduHJ8kv2Pes0TX7e63/jCTuaTOYY3BBc3lwtMkwSuzA/aQdk4kpViel3bKBqpy/+bwT8fZR7pL5xYLQ==
+"@pooltogether/loot-box@^1.0.0-beta.8":
+  version "1.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@pooltogether/loot-box/-/loot-box-1.0.0-beta.8.tgz#5525c19705c5dce44c529adbb4de49606866dac4"
+  integrity sha512-IpwgiQg5v74sUSm9F+GsaKUVu1f7YSBh5c+T0Ld/tJG8oOVfXAeTMvRSuAINQE1jOTQCBqKi3u5cZCYSErH09Q==
   dependencies:
-    "@openzeppelin/contracts" "^3.2.0"
+    "@opengsn/gsn" "2.0.1"
+    "@pooltogether/pooltogether-contracts" "3.1.0-beta.5"
     ganache-cli "^6.12.0"
     mocha-junit-reporter "^2.0.0"
 
@@ -390,6 +401,19 @@
   dependencies:
     "@pooltogether/pooltogether-contracts" "^3.0.1"
     ganache-cli "^6.12.0"
+
+"@pooltogether/pooltogether-contracts@3.1.0-beta.5":
+  version "3.1.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.1.0-beta.5.tgz#c6fbb2f0608f95bb85490539b42d0c07a1c342d3"
+  integrity sha512-GY3bxtpQ/nx79cK8j12xI4bshVPxP182+QkPUfZWyk8xzEXTVOzSxRN3uf+10WPRTpmwbdpCgsYgYL2HpzlyAg==
+  dependencies:
+    "@opengsn/gsn" "2.0.1"
+    "@openzeppelin/contracts-upgradeable" "3.3.0"
+    "@pooltogether/fixed-point" "1.0.0-beta.2"
+    "@pooltogether/pooltogether-rng-contracts" "1.0.0"
+    "@pooltogether/uniform-random-number" "1.0.0-beta.1"
+    deploy-eip-1820 "1.0.0"
+    sortition-sum-tree-factory "0.1.0"
 
 "@pooltogether/pooltogether-contracts@^3.0.1":
   version "3.0.1"
@@ -404,10 +428,15 @@
     deploy-eip-1820 "1.0.0"
     sortition-sum-tree-factory "0.1.0"
 
-"@pooltogether/pooltogether-rng-contracts@^1.0.0":
+"@pooltogether/pooltogether-rng-contracts@1.0.0", "@pooltogether/pooltogether-rng-contracts@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-rng-contracts/-/pooltogether-rng-contracts-1.0.0.tgz#191d155dc960559cce06b7ec3b0f9ed2caed0f46"
   integrity sha512-jQub/+qPLQwTFtbBCvvyIEqxJDEBEV/hgLKnuocBg2/GySWtHLz67WCy17bNn1hZw8nWIt8Ih8h+7iT2UJhtmQ==
+
+"@pooltogether/uniform-random-number@1.0.0-beta.1":
+  version "1.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@pooltogether/uniform-random-number/-/uniform-random-number-1.0.0-beta.1.tgz#72257401fe8536e95f9f812f1d249262659084a7"
+  integrity sha512-V4iqLOpNFNhnUqfKRlvqUeRwvKaODdz+qn4Qi65C3iMOnDb0J31tBvyhwKbhP4wauNuUN64WfepqkkxET9U7EQ==
 
 "@pooltogether/uniform-random-number@pooltogether/uniform-random-number#solidity-0.6":
   version "0.1.0"
