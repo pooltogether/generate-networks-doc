@@ -297,7 +297,7 @@
     "@types/web3" "^1.2.2"
     web3 "1.2.6"
 
-"@opengsn/gsn@2.0.1", "@opengsn/gsn@^2.0.1":
+"@opengsn/gsn@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@opengsn/gsn/-/gsn-2.0.1.tgz#bf77894257d8d0015948215a3ba4759d085873e1"
   integrity sha512-AHEU2SOYTxXiTlLtFGpF0p3S6mflPb1ajh4zvQPv890RNsXMqc9U3VsZ5q6HZXpooE7HOkEUHrQtqgT0rJdXGA==
@@ -368,10 +368,10 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-3.2.0.tgz#3e6b3a7662d8ed64271ade96ef42655db983fd9d"
   integrity sha512-bUOmkSoPkjnUyMiKo6RYnb0VHBk5D9KKDAgNLzF41aqAM3TeE0yGdFF5dVRcV60pZdJLlyFT/jjXIZCWyyEzAQ==
 
-"@pooltogether/current-pool-data@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.0.1.tgz#2cab2078d7df4551fb3074fbcb5c81787f9911cf"
-  integrity sha512-NB4TopoQy/k4xw6RpZopmyxmeYSh8XzU+q9AXLaLKYY9fKwwpbrsk9ZhhzPWX88qm2+grF9AHRq6/+7hcjxrXA==
+"@pooltogether/current-pool-data@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.0.4.tgz#0461d502d90e9f6a0291eed4061eb93cae203125"
+  integrity sha512-PnVbue0F0tn5PZDNnIOPilHKQojTn1ehxfIIL+9l6urowoqw2tY7/gQMTl6cuemcrzDglelSIOLLbzJTZUTTLA==
 
 "@pooltogether/fixed-point@1.0.0-beta.2":
   version "1.0.0-beta.2"
@@ -384,13 +384,12 @@
   dependencies:
     "@openzeppelin/contracts-ethereum-package" "^3.0.0"
 
-"@pooltogether/loot-box@^1.0.0-beta.8":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@pooltogether/loot-box/-/loot-box-1.0.0-beta.8.tgz#5525c19705c5dce44c529adbb4de49606866dac4"
-  integrity sha512-IpwgiQg5v74sUSm9F+GsaKUVu1f7YSBh5c+T0Ld/tJG8oOVfXAeTMvRSuAINQE1jOTQCBqKi3u5cZCYSErH09Q==
+"@pooltogether/loot-box@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@pooltogether/loot-box/-/loot-box-1.0.0.tgz#4ee74cd62661a07e38c020ce3fc7ca1e5c432e0e"
+  integrity sha512-jdZ584tDUp7rc3RcexVYKmWuj17OUsRpkk0EWE+KMOTHpB5H7S+Eg2x6u2B2Ya+KZxw5WFYbUZTxqYbCqlAvGw==
   dependencies:
-    "@opengsn/gsn" "2.0.1"
-    "@pooltogether/pooltogether-contracts" "3.1.0-beta.5"
+    "@pooltogether/pooltogether-contracts" "3.1.0-beta.7"
     ganache-cli "^6.12.0"
     mocha-junit-reporter "^2.0.0"
 
@@ -402,12 +401,11 @@
     "@pooltogether/pooltogether-contracts" "^3.0.1"
     ganache-cli "^6.12.0"
 
-"@pooltogether/pooltogether-contracts@3.1.0-beta.5":
-  version "3.1.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.1.0-beta.5.tgz#c6fbb2f0608f95bb85490539b42d0c07a1c342d3"
-  integrity sha512-GY3bxtpQ/nx79cK8j12xI4bshVPxP182+QkPUfZWyk8xzEXTVOzSxRN3uf+10WPRTpmwbdpCgsYgYL2HpzlyAg==
+"@pooltogether/pooltogether-contracts@3.1.0-beta.7":
+  version "3.1.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.1.0-beta.7.tgz#be4a2cf25f31b4a8335e9d67825d540b8c786a62"
+  integrity sha512-RPM3EakzE0XkYNlvewCmpcNSAg67so6y5w1enWa0PER29+Xd9LmZz2V50sbtabphnBpCc835lOSuAIRrF75IeA==
   dependencies:
-    "@opengsn/gsn" "2.0.1"
     "@openzeppelin/contracts-upgradeable" "3.3.0"
     "@pooltogether/fixed-point" "1.0.0-beta.2"
     "@pooltogether/pooltogether-rng-contracts" "1.0.0"
@@ -425,6 +423,18 @@
     "@pooltogether/fixed-point" pooltogether/fixed-point.git#0.1.0-upgradeable.1
     "@pooltogether/pooltogether-rng-contracts" "^1.0.0"
     "@pooltogether/uniform-random-number" pooltogether/uniform-random-number#solidity-0.6
+    deploy-eip-1820 "1.0.0"
+    sortition-sum-tree-factory "0.1.0"
+
+"@pooltogether/pooltogether-contracts@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.1.0.tgz#b66ebd13c721129754313e7ab56dc5460aef3d3d"
+  integrity sha512-G6njHUTx/821SDa1lbpkU6o0YlS5wO/3WmWfFGCBp9ifyI8l5XD2soE4GLb8Kt4f7wN1No5oDi3KzejhNhjhhw==
+  dependencies:
+    "@openzeppelin/contracts-upgradeable" "3.3.0"
+    "@pooltogether/fixed-point" "1.0.0-beta.2"
+    "@pooltogether/pooltogether-rng-contracts" "1.0.0"
+    "@pooltogether/uniform-random-number" "1.0.0-beta.1"
     deploy-eip-1820 "1.0.0"
     sortition-sum-tree-factory "0.1.0"
 

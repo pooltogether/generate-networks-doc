@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const get = require('lodash/get')
 const fs = require('fs')
 const chalk = require('chalk')
 
@@ -13,10 +14,6 @@ const networks = [
   {
     chainId: '4',
     name: 'rinkeby'
-  },
-  {
-    chainId: '3',
-    name: 'ropsten'
   }
 ]
 
@@ -82,30 +79,37 @@ async function generate() {
     const poolTogetherContractBaseUrl = "https://github.com/pooltogether/pooltogether-pool-contracts/tree/version-3"
 
 
-    append(`### [@pooltogether/current-pool-data](https://www.npmjs.com/package/@pooltogether/current-pool-data) ${packageJson.dependencies['@pooltogether/current-pool-data']}`)
-    newContractSection()
+    append(`### PoolTogether Pools & Supporting Contracts`)
+    append(`**@pooltogether/current-pool-data ${packageJson.dependencies['@pooltogether/current-pool-data']} [npm](https://www.npmjs.com/package/@pooltogether/current-pool-data)**`)
+    append(`| Contract | Address |`)
+    append(`| :--- | :--- |`)
+
+    let currentPoolDataContracts = {
+      'Weekly Dai Prize Pool': 'dai.prizePool',
+      'Weekly Dai Prize Strategy': 'dai.prizeStrategy',
+      'Loot Box ERC721': 'lootBox'
+    }
+
     const { contractAddresses } = require('@pooltogether/current-pool-data')
     if (contractAddresses[chainId]) {
-      const poolNames = Object.keys(contractAddresses[chainId])
-      for (let npi = 0; npi < poolNames.length; npi++) {
-        const poolName = poolNames[npi]
-        const pool = contractAddresses[chainId][poolName]
+      Object.keys(currentPoolDataContracts).forEach(contractName => {
+        const address = get(contractAddresses[chainId], currentPoolDataContracts[contractName])
         appendNoNewline(`| `)
-        appendNoNewline(`[${poolName.toUpperCase()}](${poolTogetherContractBaseUrl + '/contracts/prize-pool/PrizePool.sol'})`)
-        appendNoNewline(` ([open app](https://staging-v3.pooltogether.com))`)
-        append(` | [${pool.prizePool}](${etherscanBaseUrl}/address/${pool.prizePool}) | [ABI](/.gitbook/assets/prizepoolabi.json) |`)
-      }
+        appendNoNewline(`${contractName}`)
+        append(` | [${address}](${etherscanBaseUrl}/address/${address}) |`)
+      })
     }
     append('')
 
-
-    append(`### [@pooltogether/pooltogether-contracts](https://www.npmjs.com/package/@pooltogether/pooltogether-contracts) ${packageJson.dependencies['@pooltogether/pooltogether-contracts']}`)
+    append('### Core Contracts')
+    append(`**@pooltogether/pooltogether-contracts ${packageJson.dependencies['@pooltogether/pooltogether-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-contracts)**`)
     newContractSection()
     append(formatDeployments({ npmPackageName: '@pooltogether/pooltogether-contracts', ignoreContracts, networkName: name, githubBaseUrl: poolTogetherContractBaseUrl }).join('\n'))
     append('')
     
 
-    append(`### [@pooltogether/pooltogether-rng-contracts](https://www.npmjs.com/package/@pooltogether/pooltogether-rng-contracts) ${packageJson.dependencies['@pooltogether/pooltogether-rng-contracts']}`)
+    append('### RNG Contracts')
+    append(`**@pooltogether/pooltogether-rng-contracts ${packageJson.dependencies['@pooltogether/pooltogether-rng-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-rng-contracts)**`)
     newContractSection()
     append(formatDeployments({
       npmPackageName: '@pooltogether/pooltogether-rng-contracts',
@@ -115,20 +119,6 @@ async function generate() {
     }).join('\n'))
     append('')
 
-    let migrateDeployments = formatDeployments({
-      npmPackageName: '@pooltogether/migrate-v3',
-      ignoreContracts,
-      networkName: name,
-      githubBaseUrl: "https://github.com/pooltogether/pooltogether-migrate-v3/tree/master"
-    })
-
-    if (migrateDeployments.length) {
-      append(`### [@pooltogether/migrate-v3](https://github.com/pooltogether/pooltogether-migrate-v3) ${packageJson.dependencies['@pooltogether/migrate-v3']}`)
-      newContractSection()
-      append(migrateDeployments.join('\n'))
-      append('')
-    }
-
     let lootBoxDeployments = formatDeployments({
       npmPackageName: '@pooltogether/loot-box',
       ignoreContracts,
@@ -137,9 +127,25 @@ async function generate() {
     })
 
     if (lootBoxDeployments.length) {
-      append(`### [@pooltogether/loot-box](https://github.com/pooltogether/loot-box) ${packageJson.dependencies['@pooltogether/loot-box']}`)
+      append(`### Loot Box Contracts`)
+      append(`**@pooltogether/loot-box ${packageJson.dependencies['@pooltogether/loot-box']} [npm](https://www.npmjs.com/package/@pooltogether/loot-box)**`)
       newContractSection()
       append(lootBoxDeployments.join('\n'))
+      append('')
+    }
+
+    let migrateDeployments = formatDeployments({
+      npmPackageName: '@pooltogether/migrate-v3',
+      ignoreContracts,
+      networkName: name,
+      githubBaseUrl: "https://github.com/pooltogether/pooltogether-migrate-v3/tree/master"
+    })
+
+    if (migrateDeployments.length) {
+      append(`### V2-to-V3 Migration Contract`)
+      append(`**@pooltogether/migrate-v3 ${packageJson.dependencies['@pooltogether/migrate-v3']} [Github](https://github.com/pooltogether/pooltogether-migrate-v3)**`)
+      newContractSection()
+      append(migrateDeployments.join('\n'))
       append('')
     }
     
