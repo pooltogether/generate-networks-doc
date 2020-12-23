@@ -85,8 +85,10 @@ async function generate() {
     append(`| :--- | :--- |`)
 
     let currentPoolDataContracts = {
-      'Weekly Dai Prize Pool': 'dai.prizePool',
-      'Weekly Dai Prize Strategy': 'dai.prizeStrategy',
+      'Dai Prize Pool': 'dai.prizePool',
+      'Dai Prize Strategy': 'dai.prizeStrategy',
+      'UNI Prize Pool': 'uni.prizePool',
+      'UNI Prize Strategy': 'uni.prizeStrategy',
       'Loot Box ERC721': 'lootBox'
     }
 
