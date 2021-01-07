@@ -89,16 +89,21 @@ async function generate() {
       'Dai Prize Strategy': 'dai.prizeStrategy',
       'UNI Prize Pool': 'uni.prizePool',
       'UNI Prize Strategy': 'uni.prizeStrategy',
-      'Loot Box ERC721': 'lootBox'
+      'USDC Prize Pool': 'usdc.prizePool',
+      'USDC Prize Strategy': 'usdc.prizeStrategy',
+      'Loot Box ERC721': 'lootBox',
+      'Loot Box Prize Strategy Listener': 'lootBoxPrizeStrategyListener'
     }
 
     const { contractAddresses } = require('@pooltogether/current-pool-data')
     if (contractAddresses[chainId]) {
       Object.keys(currentPoolDataContracts).forEach(contractName => {
         const address = get(contractAddresses[chainId], currentPoolDataContracts[contractName])
-        appendNoNewline(`| `)
-        appendNoNewline(`${contractName}`)
-        append(` | [${address}](${etherscanBaseUrl}/address/${address}) |`)
+        if (address) {
+          appendNoNewline(`| `)
+          appendNoNewline(`${contractName}`)
+          append(` | [${address}](${etherscanBaseUrl}/address/${address}) |`)
+        }
       })
     }
     append('')
