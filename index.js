@@ -91,6 +91,8 @@ async function generate() {
       'UNI Prize Strategy': 'uni.prizeStrategy',
       'USDC Prize Pool': 'usdc.prizePool',
       'USDC Prize Strategy': 'usdc.prizeStrategy',
+      'COMP Prize Pool': 'comp.prizePool',
+      'COMP Prize Strategy': 'comp.prizeStrategy',
       'BAT Prize Pool': 'bat.prizePool',
       'BAT Prize Strategy': 'bat.prizeStrategy',
       'Loot Box ERC721': 'lootBox',
