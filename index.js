@@ -117,7 +117,14 @@ async function generate() {
     newContractSection()
     append(formatDeployments({ npmPackageName: '@pooltogether/pooltogether-contracts', ignoreContracts, networkName: name, githubBaseUrl: poolTogetherContractBaseUrl }).join('\n'))
     append('')
-    
+
+    const governanceBaseUrl = "https://github.com/pooltogether/governance/tree/main"
+
+    append('### Governance')
+    append(`**@pooltogether/governance ${packageJson.dependencies['@pooltogether/governance']} [npm](https://www.npmjs.com/package/@pooltogether/governance)**`)
+    newContractSection()
+    append(formatDeployments({ npmPackageName: '@pooltogether/governance', ignoreContracts, networkName: name, githubBaseUrl: governanceBaseUrl }).join('\n'))
+    append('')
 
     append('### RNG Contracts')
     append(`**@pooltogether/pooltogether-rng-contracts ${packageJson.dependencies['@pooltogether/pooltogether-rng-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-rng-contracts)**`)
@@ -159,6 +166,13 @@ async function generate() {
       append(migrateDeployments.join('\n'))
       append('')
     }
+
+    const merkleBaseUrl = "https://github.com/pooltogether/merkle-distributor/tree/main"
+
+    append(`**@pooltogether/merkle-distributor ${packageJson.dependencies['@pooltogether/merkle-distributor']} [npm](https://www.npmjs.com/package/@pooltogether/merkle-distributor)**`)
+    newContractSection()
+    append(formatDeployments({ npmPackageName: '@pooltogether/merkle-distributor', ignoreContracts, networkName: name, githubBaseUrl: merkleBaseUrl }).join('\n'))
+    append('')
     
     console.log(chalk.green(`Done ${name}!`))
     append('')
