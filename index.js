@@ -51,10 +51,7 @@ async function generate() {
   }
 
   append(`# 📡 Networks`)
-  append(``)
-  append(`*This document was generated [automatically](https://github.com/pooltogether/generate-networks-doc)*`)
-  append(``)
-
+  
   for (let ni = 0; ni < networks.length; ni++) {
     const network = networks[ni]
     const { chainId, name } = network
@@ -181,7 +178,11 @@ async function generate() {
     console.log(chalk.green(`Done ${name}!`))
     append('')
   }
-  
+
+  append(``)
+  append(`*This document was generated [automatically](https://github.com/pooltogether/generate-networks-doc)*`)
+  append(``)
+
   append('')
   
   fs.closeSync(out)  
