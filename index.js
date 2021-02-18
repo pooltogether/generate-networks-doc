@@ -113,7 +113,7 @@ async function generate() {
     }
     append('')
 
-    append('### Core Contracts')
+    append('### Builders')
     append(`**@pooltogether/pooltogether-contracts ${packageJson.dependencies['@pooltogether/pooltogether-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-contracts)**`)
     newContractSection()
     append(formatDeployments({ npmPackageName: '@pooltogether/pooltogether-contracts', ignoreContracts, networkName: name, githubBaseUrl: poolTogetherContractBaseUrl }).join('\n'))
