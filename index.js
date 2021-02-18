@@ -153,23 +153,9 @@ async function generate() {
       append('')
     }
 
-    let migrateDeployments = formatDeployments({
-      npmPackageName: '@pooltogether/migrate-v3',
-      ignoreContracts,
-      networkName: name,
-      githubBaseUrl: "https://github.com/pooltogether/pooltogether-migrate-v3/tree/master"
-    })
-
-    if (migrateDeployments.length) {
-      append(`### V2-to-V3 Migration Contract`)
-      append(`**@pooltogether/migrate-v3 ${packageJson.dependencies['@pooltogether/migrate-v3']} [Github](https://github.com/pooltogether/pooltogether-migrate-v3)**`)
-      newContractSection()
-      append(migrateDeployments.join('\n'))
-      append('')
-    }
-
     const merkleBaseUrl = "https://github.com/pooltogether/merkle-distributor/tree/main"
 
+    append(`### Retroactive Token Distribution`)
     append(`**@pooltogether/merkle-distributor ${packageJson.dependencies['@pooltogether/merkle-distributor']} [npm](https://www.npmjs.com/package/@pooltogether/merkle-distributor)**`)
     newContractSection()
     append(formatDeployments({ npmPackageName: '@pooltogether/merkle-distributor', ignoreContracts, networkName: name, githubBaseUrl: merkleBaseUrl }).join('\n'))
