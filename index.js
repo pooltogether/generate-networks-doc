@@ -97,7 +97,9 @@ async function generate() {
       'BAT Prize Pool': 'bat.prizePool',
       'BAT Prize Strategy': 'bat.prizeStrategy',
       'Loot Box ERC721': 'lootBox',
-      'Loot Box Prize Strategy Listener': 'lootBoxPrizeStrategyListener'
+      'Loot Box Prize Strategy Listener': 'lootBoxPrizeStrategyListener',
+      'Reserve': 'reserve',
+      'Reserve Registry': 'reserveRegistry'
     }
 
     const { contractAddresses } = require('@pooltogether/current-pool-data')
