@@ -2,11 +2,13 @@
 
 const get = require('lodash/get')
 const fs = require('fs')
+const fsPromises = require('fs').promises
 const chalk = require('chalk')
 
 const { formatDeployments } = require('./formatDeployments')
+const { formatAddressUrl } = require('./formatAddressUrl')
 
-const networks = [
+const ethereumNetworks = [
   {
     chainId: '1',
     name: 'mainnet'
@@ -14,6 +16,30 @@ const networks = [
   {
     chainId: '4',
     name: 'rinkeby'
+  }
+]
+
+const xDaiNetworks = [
+  {
+    chainId: '100',
+    name: 'xDai',
+    hardhatNetworkName: 'xdai'
+  },
+  {
+    chainId: '77',
+    name: 'sokol',
+    hardhatNetworkName: 'poaSokol'
+  }
+]
+
+const maticNetworks = [
+  {
+    chainId: 137,
+    name: 'matic'
+  },
+  {
+    chainId: 80001,
+    name: 'mumbai'
   }
 ]
 
@@ -33,54 +59,36 @@ const ignoreContracts = [
   'ProxyFactory'
 ]
 
-const outputFile = `./Networks.md`
-
-
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-async function generate() {
-  const out = fs.openSync(outputFile, 'w')
-  const append = (str) => {
-    fs.writeSync(out, str + "\n")
-  }
+const append = (out, str) => {
+  fs.writeSync(out, str + "\n")
+}
 
-  const appendNoNewline = (str) => {
-    fs.writeSync(out, str)
-  }
+const appendNoNewline = (out, str) => {
+  fs.writeSync(out, str)
+}
 
-  append(`# 📡 Networks`)
-  
+async function generateBlockchainNetworks(networks, networkFilePath) {
+  const networkFile = fs.openSync(networkFilePath, 'w')
+
   for (let ni = 0; ni < networks.length; ni++) {
     const network = networks[ni]
+
     const { chainId, name } = network
 
     console.log(chalk.yellow(`Generating network ${name}...`))
-  
-    let etherscanBaseUrl
-    if (name == 'mainnet' || name == 'homestead') {
-      etherscanBaseUrl = `https://etherscan.io`
-    } else {
-      etherscanBaseUrl = `https://${name}.etherscan.io`
-    }
 
-    append(`## ${capitalizeFirstLetter(name)}`)
-    append('')
+    append(networkFile, `# ${capitalizeFirstLetter(name)}`)
+    append(networkFile, '')
 
     const newContractSection = () => {
-      append(`| Contract | Address | Artifact |`)
-      append(`| :--- | :--- | :--- |`)
+      append(networkFile, `| Contract | Address | Artifact |`)
+      append(networkFile, `| :--- | :--- | :--- |`)
     }
     
-    const poolTogetherContractBaseUrl = "https://github.com/pooltogether/pooltogether-pool-contracts/tree/version-3"
-
-
-    append(`### PoolTogether Pools & Supporting Contracts`)
-    append(`**@pooltogether/current-pool-data ${packageJson.dependencies['@pooltogether/current-pool-data']} [npm](https://www.npmjs.com/package/@pooltogether/current-pool-data)**`)
-    append(`| Contract | Address |`)
-    append(`| :--- | :--- |`)
-
     let currentPoolDataContracts = {
       'Dai Prize Pool': 'dai.prizePool',
       'Dai Prize Strategy': 'dai.prizeStrategy',
@@ -104,78 +112,97 @@ async function generate() {
 
     const { contractAddresses } = require('@pooltogether/current-pool-data')
     if (contractAddresses[chainId]) {
+      append(networkFile, `## PoolTogether Pools & Supporting Contracts`)
+      append(networkFile, `**@pooltogether/current-pool-data ${packageJson.dependencies['@pooltogether/current-pool-data']} [npm](https://www.npmjs.com/package/@pooltogether/current-pool-data)**`)
+      append(networkFile, `| Contract | Address |`)
+      append(networkFile, `| :--- | :--- |`)
+
       Object.keys(currentPoolDataContracts).forEach(contractName => {
         const address = get(contractAddresses[chainId], currentPoolDataContracts[contractName])
         if (address) {
-          appendNoNewline(`| `)
-          appendNoNewline(`${contractName}`)
-          append(` | [${address}](${etherscanBaseUrl}/address/${address}) |`)
+          appendNoNewline(networkFile, `| `)
+          appendNoNewline(networkFile, `${contractName}`)
+          append(networkFile, ` | [${address}](${formatAddressUrl(network, address)}) |`)
         }
       })
     }
-    append('')
+    append(networkFile, '')
 
-    append('### Builders')
-    append(`**@pooltogether/pooltogether-contracts ${packageJson.dependencies['@pooltogether/pooltogether-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-contracts)**`)
+    const poolTogetherContractBaseUrl = "https://github.com/pooltogether/pooltogether-pool-contracts/tree/master"
+    append(networkFile, '## Builders')
+    append(networkFile, `**@pooltogether/pooltogether-contracts ${packageJson.dependencies['@pooltogether/pooltogether-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-contracts)**`)
     newContractSection()
-    append(formatDeployments({ npmPackageName: '@pooltogether/pooltogether-contracts', ignoreContracts, networkName: name, githubBaseUrl: poolTogetherContractBaseUrl }).join('\n'))
-    append('')
+    append(networkFile, formatDeployments({ npmPackageName: '@pooltogether/pooltogether-contracts', ignoreContracts, network, githubBaseUrl: poolTogetherContractBaseUrl }).join('\n'))
+    append(networkFile, '')
 
     const governanceBaseUrl = "https://github.com/pooltogether/governance/tree/main"
 
-    append('### Governance')
-    append(`**@pooltogether/governance ${packageJson.dependencies['@pooltogether/governance']} [npm](https://www.npmjs.com/package/@pooltogether/governance)**`)
-    newContractSection()
-    append(formatDeployments({ npmPackageName: '@pooltogether/governance', ignoreContracts, networkName: name, githubBaseUrl: governanceBaseUrl }).join('\n'))
-    append('')
+    const governanceDeployments = formatDeployments({ npmPackageName: '@pooltogether/governance', ignoreContracts, network, githubBaseUrl: governanceBaseUrl })
+    if (governanceDeployments.length) {
+      append(networkFile, '## Governance')
+      append(networkFile, `**@pooltogether/governance ${packageJson.dependencies['@pooltogether/governance']} [npm](https://www.npmjs.com/package/@pooltogether/governance)**`)
+      newContractSection()
+      append(networkFile, governanceDeployments.join('\n'))
+      append(networkFile, '')
+    }
 
-    append('### RNG Contracts')
-    append(`**@pooltogether/pooltogether-rng-contracts ${packageJson.dependencies['@pooltogether/pooltogether-rng-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-rng-contracts)**`)
+    append(networkFile, '## RNG Contracts')
+    append(networkFile, `**@pooltogether/pooltogether-rng-contracts ${packageJson.dependencies['@pooltogether/pooltogether-rng-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-rng-contracts)**`)
     newContractSection()
-    append(formatDeployments({
+    append(networkFile, formatDeployments({
       npmPackageName: '@pooltogether/pooltogether-rng-contracts',
       ignoreContracts,
-      networkName: name,
+      network,
       githubBaseUrl: "https://github.com/pooltogether/pooltogether-rng-contracts/tree/master"
     }).join('\n'))
-    append('')
+    append(networkFile, '')
 
     let lootBoxDeployments = formatDeployments({
       npmPackageName: '@pooltogether/loot-box',
       ignoreContracts,
-      networkName: name,
+      network,
       githubBaseUrl: "https://github.com/pooltogether/loot-box/tree/main"
     })
 
     if (lootBoxDeployments.length) {
-      append(`### Loot Box Contracts`)
-      append(`**@pooltogether/loot-box ${packageJson.dependencies['@pooltogether/loot-box']} [npm](https://www.npmjs.com/package/@pooltogether/loot-box)**`)
+      append(networkFile, `## Loot Box Contracts`)
+      append(networkFile, `**@pooltogether/loot-box ${packageJson.dependencies['@pooltogether/loot-box']} [npm](https://www.npmjs.com/package/@pooltogether/loot-box)**`)
       newContractSection()
-      append(lootBoxDeployments.join('\n'))
-      append('')
+      append(networkFile, lootBoxDeployments.join('\n'))
+      append(networkFile, '')
     }
 
     const merkleBaseUrl = "https://github.com/pooltogether/merkle-distributor/tree/main"
 
-    append(`### Retroactive Token Distribution`)
-    append(`**@pooltogether/merkle-distributor ${packageJson.dependencies['@pooltogether/merkle-distributor']} [npm](https://www.npmjs.com/package/@pooltogether/merkle-distributor)**`)
-    newContractSection()
-    append(formatDeployments({ npmPackageName: '@pooltogether/merkle-distributor', ignoreContracts, networkName: name, githubBaseUrl: merkleBaseUrl }).join('\n'))
-    append('')
+    const merkleDeployments = formatDeployments({ npmPackageName: '@pooltogether/merkle-distributor', ignoreContracts, network, githubBaseUrl: merkleBaseUrl })
+
+    if (merkleDeployments.length) {
+      append(networkFile, `## Retroactive Token Distribution`)
+      append(networkFile, `**@pooltogether/merkle-distributor ${packageJson.dependencies['@pooltogether/merkle-distributor']} [npm](https://www.npmjs.com/package/@pooltogether/merkle-distributor)**`)
+      newContractSection()
+      append(networkFile, merkleDeployments.join('\n'))
+      append(networkFile, '')
+    }
     
     console.log(chalk.green(`Done ${name}!`))
-    append('')
+    append(networkFile, '')
   }
 
-  append(``)
-  append(`*This document was generated [automatically](https://github.com/pooltogether/generate-networks-doc)*`)
-  append(``)
+  fs.closeSync(networkFile)
+}
 
-  append('')
-  
-  fs.closeSync(out)  
+async function generate() {
+  console.log(chalk.dim(`Generating network files...`))
 
-  console.log(chalk.green(`Output to ${outputFile}`))
+  // The output directory of all files
+  const outputDir = './networks'
+  await fsPromises.mkdir(outputDir, { recursive: true })
+
+  await generateBlockchainNetworks(ethereumNetworks, `./networks/ethereum.md`)
+  await generateBlockchainNetworks(xDaiNetworks, `./networks/xdai.md`)
+  await generateBlockchainNetworks(maticNetworks, `./networks/matic.md`)
+
+  console.log(chalk.green(`Done!`))
 }
 
 generate()

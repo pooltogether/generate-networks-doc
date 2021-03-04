@@ -4,18 +4,24 @@ const find = require('find')
 const chalk = require('chalk')
 const glob = require('glob')
 
-function formatDeployments({ npmPackageName, ignoreContracts, networkName, githubBaseUrl }) {
+const { formatAddressUrl } = require('./formatAddressUrl')
+
+function formatDeployments({ npmPackageName, ignoreContracts, network, githubBaseUrl }) {
   const result = []
 
-  const projectRoot = `${__dirname}/node_modules/${npmPackageName}/`
-  const deploymentsGlob = `${projectRoot}/deployments/${networkName}/*.json`
-  const contractPaths = glob.sync(deploymentsGlob)
-
-  let etherscanBaseUrl
-  if (networkName == 'mainnet' || networkName == 'homestead') {
-    etherscanBaseUrl = `https://etherscan.io`
+  const hardhatNetworkName = network.hardhatNetworkName || network.name
+  const projectRoot = `${__dirname}/node_modules/${npmPackageName}`
+  
+  const deploymentsDirectory = `${projectRoot}/deployments/${hardhatNetworkName}`
+  const deploymentsDirectoryWithChainId = `${projectRoot}/deployments/${hardhatNetworkName}_${network.chainId}`
+  
+  let contractPaths
+  if (fs.existsSync(deploymentsDirectory)) {
+    contractPaths = glob.sync(`${deploymentsDirectory}/*.json`)
+  } else if (fs.existsSync(deploymentsDirectoryWithChainId)) {
+    contractPaths = glob.sync(`${deploymentsDirectoryWithChainId}/*.json`)
   } else {
-    etherscanBaseUrl = `https://${networkName}.etherscan.io`
+    return result
   }
 
   for (let cpi = 0; cpi < contractPaths.length; cpi++) {
@@ -36,7 +42,7 @@ function formatDeployments({ npmPackageName, ignoreContracts, networkName, githu
         contractLink = contractName
       }
 
-      result.push(`| ${contractLink} | [${contract.address}](${etherscanBaseUrl}/address/${contract.address}) | [Artifact](${githubBaseUrl + `/deployments/${networkName}/${path.basename(contractPath)}`}) |`)
+      result.push(`| ${contractLink} | [${contract.address}](${formatAddressUrl(network, contract.address)}) | [Artifact](${githubBaseUrl + `/deployments/${hardhatNetworkName}/${path.basename(contractPath)}`}) |`)
     } else {
       console.log(chalk.dim(`Ignoring contract ${contractName}`))
     }
