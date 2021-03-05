@@ -16,6 +16,10 @@ const ethereumNetworks = [
   {
     chainId: '4',
     name: 'rinkeby'
+  },
+  {
+    chainId: '42',
+    name: 'kovan'
   }
 ]
 

@@ -493,10 +493,10 @@
     deploy-eip-1820 "1.0.0"
     sortition-sum-tree-factory "0.1.0"
 
-"@pooltogether/pooltogether-contracts@^3.3.1":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.3.1.tgz#76673829ac5a197f6914c6fe914ff5c1be9c71da"
-  integrity sha512-FoA2SvOGifbFV0dJ3sAzA4uMLds+OUL9bT3j0NAwcDQBnaK1/IV5KBgU/eJR7f/7Pb5djuElTWSZQoRRIpju9g==
+"@pooltogether/pooltogether-contracts@^3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.3.2.tgz#01e9bc77bc39879a0b96df4365032aadd3eae1d8"
+  integrity sha512-DttMVsMFKipZ7gDUmp2Y/KdRU7GquQFgadjOD/25I35sTFOsNDX+wu2IiO1sQt0ZZy9wSBTr0qF8Tcx9gVALIA==
   dependencies:
     "@openzeppelin/contracts-upgradeable" "3.4.0"
     "@pooltogether/fixed-point" "1.0.0-beta.2"
