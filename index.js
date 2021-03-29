@@ -132,61 +132,46 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
     }
     append(networkFile, '')
 
-    const poolTogetherContractBaseUrl = "https://github.com/pooltogether/pooltogether-pool-contracts/tree/master"
-    append(networkFile, '## Builders')
-    append(networkFile, `**@pooltogether/pooltogether-contracts ${packageJson.dependencies['@pooltogether/pooltogether-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-contracts)**`)
-    newContractSection()
-    append(networkFile, formatDeployments({ npmPackageName: '@pooltogether/pooltogether-contracts', ignoreContracts, network, githubBaseUrl: poolTogetherContractBaseUrl }).join('\n'))
-    append(networkFile, '')
-
-    const governanceBaseUrl = "https://github.com/pooltogether/governance/tree/main"
-
-    const governanceDeployments = formatDeployments({ npmPackageName: '@pooltogether/governance', ignoreContracts, network, githubBaseUrl: governanceBaseUrl })
-    if (governanceDeployments.length) {
-      append(networkFile, '## Governance')
-      append(networkFile, `**@pooltogether/governance ${packageJson.dependencies['@pooltogether/governance']} [npm](https://www.npmjs.com/package/@pooltogether/governance)**`)
-      newContractSection()
-      append(networkFile, governanceDeployments.join('\n'))
-      append(networkFile, '')
+    function appendPackage({ name, npmPackageName, githubBaseUrl }) {
+      const deployments = formatDeployments({ npmPackageName, ignoreContracts, network, githubBaseUrl })
+      if (deployments.length) {
+        append(networkFile, `## ${name}`)
+        append(networkFile, `**${npmPackageName} ${packageJson.dependencies[npmPackageName]} [npm](https://www.npmjs.com/package/${npmPackageName})**`)
+        newContractSection()
+        append(networkFile, deployments.join('\n'))
+        append(networkFile, '')
+      }
     }
 
-    append(networkFile, '## RNG Contracts')
-    append(networkFile, `**@pooltogether/pooltogether-rng-contracts ${packageJson.dependencies['@pooltogether/pooltogether-rng-contracts']} [npm](https://www.npmjs.com/package/@pooltogether/pooltogether-rng-contracts)**`)
-    newContractSection()
-    append(networkFile, formatDeployments({
-      npmPackageName: '@pooltogether/pooltogether-rng-contracts',
-      ignoreContracts,
-      network,
-      githubBaseUrl: "https://github.com/pooltogether/pooltogether-rng-contracts/tree/master"
-    }).join('\n'))
-    append(networkFile, '')
-
-    let lootBoxDeployments = formatDeployments({
-      npmPackageName: '@pooltogether/loot-box',
-      ignoreContracts,
-      network,
-      githubBaseUrl: "https://github.com/pooltogether/loot-box/tree/main"
+    appendPackage({
+      name: 'Builders',
+      npmPackageName: '@pooltogether/pooltogether-contracts',
+      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-pool-contracts/tree/master'
     })
 
-    if (lootBoxDeployments.length) {
-      append(networkFile, `## Loot Box Contracts`)
-      append(networkFile, `**@pooltogether/loot-box ${packageJson.dependencies['@pooltogether/loot-box']} [npm](https://www.npmjs.com/package/@pooltogether/loot-box)**`)
-      newContractSection()
-      append(networkFile, lootBoxDeployments.join('\n'))
-      append(networkFile, '')
-    }
+    appendPackage({
+      name: 'Governance',
+      npmPackageName: '@pooltogether/governance',
+      githubBaseUrl: 'https://github.com/pooltogether/governance/tree/main'
+    })
 
-    const merkleBaseUrl = "https://github.com/pooltogether/merkle-distributor/tree/main"
+    appendPackage({
+      name: 'RNG Contracts',
+      npmPackageName: '@pooltogether/pooltogether-rng-contracts',
+      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-rng-contracts/tree/master'
+    })
 
-    const merkleDeployments = formatDeployments({ npmPackageName: '@pooltogether/merkle-distributor', ignoreContracts, network, githubBaseUrl: merkleBaseUrl })
+    appendPackage({
+      name: 'Loot Box Contracts',
+      npmPackageName: '@pooltogether/loot-box',
+      githubBaseUrl: 'https://github.com/pooltogether/loot-box/tree/main'
+    })
 
-    if (merkleDeployments.length) {
-      append(networkFile, `## Retroactive Token Distribution`)
-      append(networkFile, `**@pooltogether/merkle-distributor ${packageJson.dependencies['@pooltogether/merkle-distributor']} [npm](https://www.npmjs.com/package/@pooltogether/merkle-distributor)**`)
-      newContractSection()
-      append(networkFile, merkleDeployments.join('\n'))
-      append(networkFile, '')
-    }
+    appendPackage({
+      name: 'Retroactive Token Distribution',
+      npmPackageName: '@pooltogether/merkle-distributor',
+      githubBaseUrl: 'https://github.com/pooltogether/merkle-distributor/tree/main'
+    })
     
     console.log(chalk.green(`Done ${name}!`))
     append(networkFile, '')
