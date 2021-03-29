@@ -16,7 +16,7 @@
     "@pooltogether/pooltogether-contracts": "^3.3.7",
     "@pooltogether/governance": "^1.0.1",
     "@pooltogether/merkle-distributor": "^1.0.2",
-    "@pooltogether/pooltogether-rng-contracts": "^1.1.1",
+    "@pooltogether/pooltogether-rng-contracts": "^1.1.2",
     "find": "^0.3.0",
     "lodash": "^4.17.20"
   }
