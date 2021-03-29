@@ -69,6 +69,8 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       'COMP POOL Faucet': 'compFaucet',
       'BAT Prize Pool': 'bat.prizePool',
       'BAT Prize Strategy': 'bat.prizeStrategy',
+      'POOL Prize Pool': 'pool.prizePool',
+      'POOL Prize Strategy': 'pool.prizeStrategy',
       'Loot Box ERC721': 'lootBox',
       'Loot Box Prize Strategy Listener': 'lootBoxPrizeStrategyListener',
       'Reserve': 'reserve',
