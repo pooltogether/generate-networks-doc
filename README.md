@@ -2,7 +2,49 @@
 
 This project updates the network pages in the official [PoolTogether documentation](https://docs.pooltogether.com).  This project will gather all deployed contract addresses and format markdown pages for each network.
 
-Note: the pages must have been created through Gitbook, otherwise they won't show up.  Pages for new networks should first be added to Gitbook, then they can be generated here.
+# Adding a New Package
+
+Packages must use [hardhat](https://hardhat.org) and be deployed using the `hardhat-deploy` plugin.
+
+First add the package as a dependency to `package.json`.  For example:
+
+```json
+"dependencies": {
+  "@pooltogether/governance": "^1.0.1"
+}
+```
+
+Secondly update the `index.js` to include the package.  Addd a new `appendPackage` call in the appropriate location.  For example:
+
+```javascript
+appendPackage({
+  name: 'Governance',
+  npmPackageName: '@pooltogether/governance',
+  githubBaseUrl: 'https://github.com/pooltogether/governance/tree/main'
+})
+```
+
+# Adding a New Network
+
+The documentation is managed through Gitbook, so you must first create the page for the network in Gitbook.
+
+Once the page is added in Gitbook, you can add the new network entry in `index.js`.  Update the `generate()` function to include the new network.  For example:
+
+```javascript
+const maticNetworks = [
+  {
+    chainId: 137,
+    name: 'matic'
+  },
+  {
+    chainId: 80001,
+    name: 'mumbai'
+  }
+]
+await generateBlockchainNetworks(maticNetworks, `./networks/matic.md`)
+```
+
+Note that the `matic.md` will be the generated Markdown file.  This filename must match the page that was created in Gitbook.
 
 # Setup
 

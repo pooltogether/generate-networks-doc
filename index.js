@@ -8,45 +8,6 @@ const chalk = require('chalk')
 const { formatDeployments } = require('./formatDeployments')
 const { formatAddressUrl } = require('./formatAddressUrl')
 
-const ethereumNetworks = [
-  {
-    chainId: '1',
-    name: 'mainnet'
-  },
-  {
-    chainId: '4',
-    name: 'rinkeby'
-  },
-  {
-    chainId: '42',
-    name: 'kovan'
-  }
-]
-
-const xDaiNetworks = [
-  {
-    chainId: '100',
-    name: 'xDai',
-    hardhatNetworkName: 'xdai'
-  },
-  {
-    chainId: '77',
-    name: 'sokol',
-    hardhatNetworkName: 'poaSokol'
-  }
-]
-
-const maticNetworks = [
-  {
-    chainId: 137,
-    name: 'matic'
-  },
-  {
-    chainId: 80001,
-    name: 'mumbai'
-  }
-]
-
 const packageJson = require('./package.json')
 
 const ignoreContracts = [
@@ -186,6 +147,45 @@ async function generate() {
   // The output directory of all files
   const outputDir = './networks'
   await fsPromises.mkdir(outputDir, { recursive: true })
+
+  const ethereumNetworks = [
+    {
+      chainId: '1',
+      name: 'mainnet'
+    },
+    {
+      chainId: '4',
+      name: 'rinkeby'
+    },
+    {
+      chainId: '42',
+      name: 'kovan'
+    }
+  ]
+
+  const xDaiNetworks = [
+    {
+      chainId: '100',
+      name: 'xDai',
+      hardhatNetworkName: 'xdai'
+    },
+    {
+      chainId: '77',
+      name: 'sokol',
+      hardhatNetworkName: 'poaSokol'
+    }
+  ]
+
+  const maticNetworks = [
+    {
+      chainId: 137,
+      name: 'matic'
+    },
+    {
+      chainId: 80001,
+      name: 'mumbai'
+    }
+  ]
 
   await generateBlockchainNetworks(ethereumNetworks, `./networks/ethereum.md`)
   await generateBlockchainNetworks(xDaiNetworks, `./networks/xdai.md`)
