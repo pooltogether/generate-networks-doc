@@ -189,9 +189,23 @@ async function generate() {
     }
   ]
 
+  const binanceNetworks = [
+    {
+      chainId: 56,
+      name: 'BSC',
+      hardhatNetworkName: 'bsc'
+    },
+    {
+      chainId: 97,
+      name: 'BSC Testnet',
+      hardhatNetworkName: 'bscTestnet'
+    }
+  ]
+
   await generateBlockchainNetworks(ethereumNetworks, `./networks/ethereum.md`)
   await generateBlockchainNetworks(xDaiNetworks, `./networks/xdai.md`)
   await generateBlockchainNetworks(maticNetworks, `./networks/matic.md`)
+  await generateBlockchainNetworks(binanceNetworks, `./networks/binance.md`)
 
   console.log(chalk.green(`Done!`))
 }
