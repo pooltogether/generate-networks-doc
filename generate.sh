@@ -6,8 +6,8 @@ echo "Cloning repo..."
 git clone git@github.com:pooltogether/documentation.git gitbook
 cd gitbook
 git checkout v3.3.0
-cp -rf ../networks/* networks/
-git add networks
+cp -rf ../networks/* resources/networks/
+git add resources/networks
 git commit -m "Updated networks directory"
 echo "Pushing changes..."
 git push
