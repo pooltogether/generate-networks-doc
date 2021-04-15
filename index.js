@@ -136,6 +136,19 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       githubBaseUrl: 'https://github.com/pooltogether/merkle-distributor/tree/main'
     })
     
+    appendPackage({
+      name: 'GenericProxyFactory',
+      npmPackageName: '@pooltogether/pooltogether-proxy-factory',
+      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-proxy-factory/tree/main'
+    })
+
+    appendPackage({
+      name: 'AaveYieldSource',
+      npmPackageName: '@pooltogether/aave-yield-source',
+      githubBaseUrl: 'https://github.com/pooltogether/aave-yield-source/tree/main'
+    })
+
+
     console.log(chalk.green(`Done ${name}!`))
     append(networkFile, '')
   }
