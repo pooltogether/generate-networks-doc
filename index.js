@@ -74,7 +74,6 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       'POOL POOL Faucet': 'poolPoolFaucet',
       'Loot Box ERC721': 'lootBox',
       'Loot Box Prize Strategy Listener': 'lootBoxPrizeStrategyListener',
-      'Reserve': 'reserve',
       'Reserve Registry': 'reserveRegistry'
     }
 
