@@ -18,7 +18,7 @@
     "@pooltogether/merkle-distributor": "^1.0.2",
     "@pooltogether/pooltogether-rng-contracts": "^1.1.2",
     "@pooltogether/pooltogether-proxy-factory": "^1.0.0.beta.3",
-    "@pooltogether/aave-yield-source":"^1.0.0",
+    "@pooltogether/aave-yield-source":"^1.0.1",
     "find": "^0.3.0",
     "lodash": "^4.17.20"
   }

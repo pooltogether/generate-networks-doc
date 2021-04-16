@@ -434,10 +434,10 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-3.2.0.tgz#3e6b3a7662d8ed64271ade96ef42655db983fd9d"
   integrity sha512-bUOmkSoPkjnUyMiKo6RYnb0VHBk5D9KKDAgNLzF41aqAM3TeE0yGdFF5dVRcV60pZdJLlyFT/jjXIZCWyyEzAQ==
 
-"@pooltogether/aave-yield-source@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@pooltogether/aave-yield-source/-/aave-yield-source-1.0.0.tgz#3fa1688d5132d7711872f0ddc68650c7c8caad61"
-  integrity sha512-oGlmnLsF2cR5rSdsf3Mkwqj9by9qTrj5YrZRUPDexYS3fQDXoiyDBE4yizgZU+Eke3CC545IESZJKcZmcBovqA==
+"@pooltogether/aave-yield-source@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@pooltogether/aave-yield-source/-/aave-yield-source-1.0.1.tgz#791fdfb5181ab495132ca1dd0e67a0191c57f63b"
+  integrity sha512-RUgmAqpIZo4Z1iBjhGFcbSCI9Bf0WYapnwChJOqcK9kYlXx2m9oBeAQHVAJbCa35TZysT8MxbZj9KTYM2tbKAg==
   dependencies:
     "@aave/protocol-v2" "1.0.1"
     "@openzeppelin/contracts-upgradeable" "3.4.1"
@@ -533,7 +533,7 @@
     deploy-eip-1820 "1.0.0"
     sortition-sum-tree-factory "0.1.0"
 
-"@pooltogether/pooltogether-proxy-factory@^1.0.0":
+"@pooltogether/pooltogether-proxy-factory@^1.0.0.beta.3":
   version "1.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-proxy-factory/-/pooltogether-proxy-factory-1.0.0-beta.3.tgz#ff14480cf789361ce589409c6a77b176df644908"
   integrity sha512-eIeNkbxLbymkToYU+F6gnE6mFsJytpOy/j7MP1G7rnIvrpCEQI5IgsxtblH2ief2mBclVHNjwWWUff6NvKvflA==
