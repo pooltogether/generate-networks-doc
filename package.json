@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@pooltogether/current-pool-data": "^3.3.4",
-    "@pooltogether/loot-box": "^1.0.0",
+    "@pooltogether/loot-box": "^1.1.0",
     "@pooltogether/migrate-v3": "^0.1.3",
     "@pooltogether/pooltogether-contracts": "^3.3.8",
     "@pooltogether/governance": "^1.0.1",
