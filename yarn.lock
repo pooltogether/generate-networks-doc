@@ -434,10 +434,10 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-3.2.0.tgz#3e6b3a7662d8ed64271ade96ef42655db983fd9d"
   integrity sha512-bUOmkSoPkjnUyMiKo6RYnb0VHBk5D9KKDAgNLzF41aqAM3TeE0yGdFF5dVRcV60pZdJLlyFT/jjXIZCWyyEzAQ==
 
-"@pooltogether/aave-yield-source@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@pooltogether/aave-yield-source/-/aave-yield-source-1.0.1.tgz#791fdfb5181ab495132ca1dd0e67a0191c57f63b"
-  integrity sha512-RUgmAqpIZo4Z1iBjhGFcbSCI9Bf0WYapnwChJOqcK9kYlXx2m9oBeAQHVAJbCa35TZysT8MxbZj9KTYM2tbKAg==
+"@pooltogether/aave-yield-source@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@pooltogether/aave-yield-source/-/aave-yield-source-1.0.3.tgz#16cdaf8c9c11bff1c3af09c96dd1edc66ff8f323"
+  integrity sha512-tVk6IK/6I+hjXDysEMuaBDdgiE6jum0EsErpm8gN11UQ9nX8IzQAqn+xgVJWp+upNwc91XEI0RnS0ESyWWBsyA==
   dependencies:
     "@aave/protocol-v2" "1.0.1"
     "@openzeppelin/contracts-upgradeable" "3.4.1"
