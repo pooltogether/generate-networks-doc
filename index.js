@@ -137,13 +137,13 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
     })
     
     appendPackage({
-      name: 'GenericProxyFactory',
+      name: 'Generic Proxy Factory',
       npmPackageName: '@pooltogether/pooltogether-proxy-factory',
       githubBaseUrl: 'https://github.com/pooltogether/pooltogether-proxy-factory/tree/main'
     })
 
     appendPackage({
-      name: 'AaveYieldSource',
+      name: 'Aave Yield Source',
       npmPackageName: '@pooltogether/aave-yield-source',
       githubBaseUrl: 'https://github.com/pooltogether/aave-yield-source/tree/main'
     })
