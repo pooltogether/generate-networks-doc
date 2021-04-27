@@ -54,28 +54,32 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       append(networkFile, `| :--- | :--- | :--- |`)
     }
     
-    let currentPoolDataContracts = {
-      'Dai Prize Pool': 'dai.prizePool',
-      'Dai Prize Strategy': 'dai.prizeStrategy',
-      'Dai POOL Faucet': 'daiFaucet',
-      'UNI Prize Pool': 'uni.prizePool',
-      'UNI Prize Strategy': 'uni.prizeStrategy',
-      'UNI POOL Faucet': 'uniFaucet',
-      'USDC Prize Pool': 'usdc.prizePool',
-      'USDC Prize Strategy': 'usdc.prizeStrategy',
-      'USDC POOL Faucet': 'usdcFaucet',
-      'COMP Prize Pool': 'comp.prizePool',
-      'COMP Prize Strategy': 'comp.prizeStrategy',
-      'COMP POOL Faucet': 'compFaucet',
-      'BAT Prize Pool': 'bat.prizePool',
-      'BAT Prize Strategy': 'bat.prizeStrategy',
-      'POOL Prize Pool': 'pool.prizePool',
-      'POOL Prize Strategy': 'pool.prizeStrategy',
-      'POOL POOL Faucet': 'poolPoolFaucet',
-      'Loot Box ERC721': 'lootBox',
-      'Loot Box Prize Strategy Listener': 'lootBoxPrizeStrategyListener',
-      'Reserve Registry': 'reserveRegistry'
-    }
+    let currentPoolDataContracts = [
+      { name: 'Dai Prize Pool', addressPath: 'dai.prizePool' },
+      { name: 'Dai Prize Strategy', addressPath: 'dai.prizeStrategy' },
+      { name: 'Dai POOL Faucet', addressPath: 'daiFaucet' },
+      { name: 'UNI Prize Pool', addressPath: 'uni.prizePool' },
+      { name: 'UNI Prize Strategy', addressPath: 'uni.prizeStrategy' },
+      { name: 'UNI POOL Faucet', addressPath: 'uniFaucet' },
+      { name: 'USDC Prize Pool', addressPath: 'usdc.prizePool' },
+      { name: 'USDC Prize Strategy', addressPath: 'usdc.prizeStrategy' },
+      { name: 'USDC POOL Faucet', addressPath: 'usdcFaucet' },
+      { name: 'COMP Prize Pool', addressPath: 'comp.prizePool' },
+      { name: 'COMP Prize Strategy', addressPath: 'comp.prizeStrategy' },
+      { name: 'COMP POOL Faucet', addressPath: 'compFaucet' },
+      { name: 'BAT Prize Pool', addressPath: 'bat.prizePool' },
+      { name: 'BAT Prize Strategy', addressPath: 'bat.prizeStrategy' },
+      { name: 'POOL Prize Pool', addressPath: 'pool.prizePool' },
+      { name: 'POOL Prize Strategy', addressPath: 'pool.prizeStrategy' },
+      { name: 'POOL POOL Faucet', addressPath: 'poolPoolFaucet' },
+      { name: 'Loot Box ERC721', addressPath: 'lootBox' },
+      { name: 'Loot Box Prize Strategy Listener', addressPath: 'lootBoxPrizeStrategyListener' },
+      { name: 'Aave USDT Prize Pool', addressPath: 'aaveUsdt.prizePool' },
+      { name: 'Aave USDT Prize Strategy', addressPath: 'aaveUsdt.prizeStrategy' },
+      { name: 'USDT Prize Pool', addressPath: 'usdt.prizePool' },
+      { name: 'USDT Prize Strategy', addressPath: 'usdt.prizeStrategy' },
+      { name: 'Reserve Registry', addressPath: 'reserveRegistry'}
+    ]
 
     const { contractAddresses } = require('@pooltogether/current-pool-data')
     if (contractAddresses[chainId]) {
@@ -84,11 +88,11 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       append(networkFile, `| Contract | Address |`)
       append(networkFile, `| :--- | :--- |`)
 
-      Object.keys(currentPoolDataContracts).forEach(contractName => {
-        const address = get(contractAddresses[chainId], currentPoolDataContracts[contractName])
+      currentPoolDataContracts.forEach(contract => {
+        const address = get(contractAddresses[chainId], contract.addressPath)
         if (address) {
           appendNoNewline(networkFile, `| `)
-          appendNoNewline(networkFile, `${contractName}`)
+          appendNoNewline(networkFile, `${contract.name}`)
           append(networkFile, ` | [${address}](${formatAddressUrl(network, address)}) |`)
         }
       })
