@@ -16,7 +16,7 @@
     "@pooltogether/pooltogether-contracts": "^3.3.8",
     "@pooltogether/governance": "^1.0.1",
     "@pooltogether/merkle-distributor": "^1.0.2",
-    "@pooltogether/pooltogether-rng-contracts": "^1.1.2",
+    "@pooltogether/pooltogether-rng-contracts": "^1.2.0",
     "@pooltogether/pooltogether-proxy-factory": "^1.0.0.beta.3",
     "@pooltogether/aave-yield-source":"^1.0.3",
     "find": "^0.3.0",
