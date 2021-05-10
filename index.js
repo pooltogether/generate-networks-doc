@@ -148,6 +148,12 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
     })
 
     appendPackage({
+      name: 'Prize Strategy Upkeep',
+      npmPackageName: '@pooltogether/pooltogether-prizestrategy-upkeep',
+      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-prizestrategy-upkeep/tree/main'
+    })
+
+    appendPackage({
       name: 'Aave Yield Source',
       npmPackageName: '@pooltogether/aave-yield-source',
       githubBaseUrl: 'https://github.com/pooltogether/aave-yield-source/tree/main'
