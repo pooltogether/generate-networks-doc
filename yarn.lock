@@ -533,6 +533,16 @@
     deploy-eip-1820 "1.0.0"
     sortition-sum-tree-factory "0.1.0"
 
+"@pooltogether/pooltogether-generic-registry@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-generic-registry/-/pooltogether-generic-registry-1.0.9.tgz#f16fba214b40153144a2fca78c1b798d1bbf49bf"
+  integrity sha512-NsgvwbSD2k+hok7xefNtdGa10adLd3Xzs/JMs/Ib+w+7BXbvV87mAo66fZEBxLRXxUKk2aXvS2LGHNdsvrpYaA==
+
+"@pooltogether/pooltogether-prizepool-registry@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-prizepool-registry/-/pooltogether-prizepool-registry-1.0.0.tgz#0ec761deaaa892e94a8d1b222541decc436a19a2"
+  integrity sha512-vgv4TdOeJQMt4DzBRHMhHbaSguvfLJtv47FIaTijGECs9bPrCbgqr0RE826VPYqzKKOVlVRJo3vQU4yGctYJ+A==
+
 "@pooltogether/pooltogether-prizestrategy-upkeep@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-prizestrategy-upkeep/-/pooltogether-prizestrategy-upkeep-1.0.0.tgz#4f46b71092109e9b323d55f8d2f0e38e6c38dbcb"
