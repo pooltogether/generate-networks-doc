@@ -30,8 +30,10 @@ function formatDeployments({ npmPackageName, ignoreContracts, network, githubBas
     const contract = JSON.parse(fs.readFileSync(contractPath))
     const contractName = path.basename(contractPath, ".json")
 
-    if (!ignoreContracts.includes(contractName)) {
+    if (!ignoreContracts.includes(contractName) && fs.existsSync(`${projectRoot}/contracts`)) {
+      
       console.log(chalk.dim(`Found contract ${contractName}...`))
+
 
       const solidityFilepaths = find.fileSync(`${contractName}.sol`, `${projectRoot}/contracts`)
       let contractLink
