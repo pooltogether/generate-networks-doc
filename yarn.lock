@@ -444,10 +444,10 @@
     "@pooltogether/fixed-point" "1.0.0"
     "@pooltogether/yield-source-interface" "1.0.1"
 
-"@pooltogether/current-pool-data@^3.4.5":
-  version "3.4.6"
-  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.4.6.tgz#e45773962a07d68a51344d50de165defb3e7c679"
-  integrity sha512-FBanBSBGvD+Gxvp56p9Y3qk6a7fB/muxoTx6ONB57NUYnQgA9OdpxibuIO9AXcsMEzp76LXV8mHuvFTWvgpUYQ==
+"@pooltogether/current-pool-data@^3.4.14":
+  version "3.4.14"
+  resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.4.14.tgz#5138a9cc7ee8082d26931d95be97da4bbdf3cd7d"
+  integrity sha512-VGt9iIBX4oWzA++XKRe9eIFJ81WLuKOZz1IKfSPousoYVJsGTBOs6ylR03djJ3zu+RiXBb071MR6mIbcv1qfSg==
 
 "@pooltogether/fixed-point@1.0.0":
   version "1.0.0"

@@ -79,6 +79,8 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       { name: 'USDT Prize Pool', addressPath: 'usdt.prizePool' },
       { name: 'USDT Prize Strategy', addressPath: 'usdt.prizeStrategy' },
       { name: 'USDT Token Faucet', addressPath: 'usdt.tokenFaucet' },
+      { name: 'Uniswap POOL LP Prize Pool', addressPath: 'uniswapPoolEthFaucet' },
+      { name: 'Uniswap POOL LP Faucet', addressPath: 'usdt.tokenFaucet' },
       { name: 'Reserve Registry', addressPath: 'reserveRegistry'}
     ]
 
