@@ -155,18 +155,31 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       githubBaseUrl: 'https://github.com/pooltogether/pooltogether-generic-registry/tree/main'
     })
 
-    // appendPackage({
-    //   name: 'Prize Pool Registry',
-    //   npmPackageName: '@pooltogether/pooltogether-prizepool-registry',
-    //   githubBaseUrl: 'https://github.com/pooltogether/pooltogether-prizepool-registry/tree/main'
-    // })
+    appendPackage({
+      name: 'Prize Pool Registry',
+      npmPackageName: '@pooltogether/pooltogether-prizepool-registry',
+      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-prizepool-registry/tree/main'
+    })
 
+    appendPackage({
+      name: 'Pods Registry',
+      npmPackageName: '@pooltogether/pooltogether-pods-registry',
+      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-prizepool-registry/tree/main'
+    })
 
+    
     appendPackage({
       name: 'Prize Strategy Upkeep',
       npmPackageName: '@pooltogether/pooltogether-prizestrategy-upkeep',
       githubBaseUrl: 'https://github.com/pooltogether/pooltogether-prizestrategy-upkeep/tree/main'
     })
+
+    appendPackage({
+      name: 'Pods Upkeep',
+      npmPackageName: '@pooltogether/pooltogether-pods-upkeep',
+      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-pods-upkeep/tree/master'
+    })
+
 
     appendPackage({
       name: 'Aave Yield Source',

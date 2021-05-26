@@ -30,19 +30,30 @@ function formatDeployments({ npmPackageName, ignoreContracts, network, githubBas
     const contract = JSON.parse(fs.readFileSync(contractPath))
     const contractName = path.basename(contractPath, ".json")
 
-    if (!ignoreContracts.includes(contractName) && fs.existsSync(`${projectRoot}/contracts`)) {
+    if (!ignoreContracts.includes(contractName)) {
       
       console.log(chalk.dim(`Found contract ${contractName}...`))
 
-
-      const solidityFilepaths = find.fileSync(`${contractName}.sol`, `${projectRoot}/contracts`)
       let contractLink
-      if (solidityFilepaths.length > 0) {
-        const solidityFilePath = solidityFilepaths[0].split("/contracts")[1]
-        contractLink = `[${contractName}](${githubBaseUrl}/contracts${solidityFilePath})`
-      } else {
+      let solidityFilePath
+
+      if(fs.existsSync(`${projectRoot}/contracts`)){
+        solidityFilepaths = find.fileSync(`${contractName}.sol`, `${projectRoot}/contracts`)
+        
+        if (solidityFilepaths.length > 0) {
+          const solidityFilePath = solidityFilepaths[0].split("/contracts")[1]
+          contractLink = `[${contractName}](${githubBaseUrl}/contracts${solidityFilePath})`
+        } else {
+          contractLink = contractName
+        }
+
+      }
+      else { // case where no contracts folder in package
         contractLink = contractName
       }
+
+
+
 
       result.push(`| ${contractLink} | [${contract.address}](${formatAddressUrl(network, contract.address)}) | [Artifact](${githubBaseUrl + `/deployments/${hardhatNetworkName}/${path.basename(contractPath)}`}) |`)
     } else {

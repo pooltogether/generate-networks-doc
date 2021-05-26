@@ -538,10 +538,20 @@
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-generic-registry/-/pooltogether-generic-registry-1.0.9.tgz#f16fba214b40153144a2fca78c1b798d1bbf49bf"
   integrity sha512-NsgvwbSD2k+hok7xefNtdGa10adLd3Xzs/JMs/Ib+w+7BXbvV87mAo66fZEBxLRXxUKk2aXvS2LGHNdsvrpYaA==
 
-"@pooltogether/pooltogether-prizepool-registry@^1.0.0":
+"@pooltogether/pooltogether-pods-registry@^1.0.0":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-prizepool-registry/-/pooltogether-prizepool-registry-1.0.0.tgz#0ec761deaaa892e94a8d1b222541decc436a19a2"
-  integrity sha512-vgv4TdOeJQMt4DzBRHMhHbaSguvfLJtv47FIaTijGECs9bPrCbgqr0RE826VPYqzKKOVlVRJo3vQU4yGctYJ+A==
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-pods-registry/-/pooltogether-pods-registry-1.0.0.tgz#acc4a7edbc8d8bc4700dfd2601cfa95a6ef0e5df"
+  integrity sha512-4rx1W128AUeg7TONxkn+nJExE+T3DMpNcJSD9BldFEGyKwKpRwvAA0spZjImt8XVBGihScyjXowdmZvzEQjZVw==
+
+"@pooltogether/pooltogether-pods-upkeep@^1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-pods-upkeep/-/pooltogether-pods-upkeep-1.0.0-beta.4.tgz#cb945558ebee4ddc8d1b9f01fb7577f5a80879ca"
+  integrity sha512-39vrkf03O0A7Myd9mWqNE0M+isqlc8pknneIcBPU7QN2BSt2k5GbiF6H6DuK7JUz/61P+ie1sqd2EKVZIr7e6Q==
+
+"@pooltogether/pooltogether-prizepool-registry@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-prizepool-registry/-/pooltogether-prizepool-registry-1.0.1.tgz#7f1da45b0a90588d1a1e2e9991d35a3978c381f4"
+  integrity sha512-tIS54Q2IiLGyOpMF2xE6bPWk1Kwj6X9QBNRx4SPNXaqubt/TMWXEw95kQsuB2sP3WMBG3iFbY/GJMeq9toMEPQ==
 
 "@pooltogether/pooltogether-prizestrategy-upkeep@^1.0.0":
   version "1.0.0"
