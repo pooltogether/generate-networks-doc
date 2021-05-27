@@ -10,7 +10,7 @@
     "generate-and-push": "./generate.sh"
   },
   "dependencies": {
-    "@pooltogether/current-pool-data": "^3.4.14",
+    "@pooltogether/current-pool-data": "pooltogether/current-pool-data#master",
     "@pooltogether/aave-yield-source": "^1.0.3",
     "@pooltogether/governance": "^1.0.1",
     "@pooltogether/loot-box": "^1.1.0",

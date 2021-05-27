@@ -1,265 +1,297 @@
 #!/usr/bin/env node
 
-const get = require('lodash/get')
-const fs = require('fs')
-const fsPromises = require('fs').promises
-const chalk = require('chalk')
+const get = require("lodash/get");
+const fs = require("fs");
+const fsPromises = require("fs").promises;
+const chalk = require("chalk");
 
-const { formatDeployments } = require('./formatDeployments')
-const { formatAddressUrl } = require('./formatAddressUrl')
+const { formatDeployments } = require("./formatDeployments");
+const { formatAddressUrl } = require("./formatAddressUrl");
 
-const packageJson = require('./package.json')
+const packageJson = require("./package.json");
 
 const ignoreContracts = [
-  'CompoundPrizePoolProxyFactory',
-  'ControlledTokenProxyFactory',
-  'SingleRandomWinnerProxyFactory',
-  'TicketProxyFactory',
-  'Link',
-  'yVaultPrizePoolProxyFactory',
-  'StakePrizePoolProxyFactory',
-  'MultipleWinnersProxyFactory',
-  'ComptrollerImplementation',
-  'ProxyAdmin',
-  'ProxyFactory'
-]
+  "CompoundPrizePoolProxyFactory",
+  "ControlledTokenProxyFactory",
+  "SingleRandomWinnerProxyFactory",
+  "TicketProxyFactory",
+  "Link",
+  "yVaultPrizePoolProxyFactory",
+  "StakePrizePoolProxyFactory",
+  "MultipleWinnersProxyFactory",
+  "ComptrollerImplementation",
+  "ProxyAdmin",
+  "ProxyFactory",
+];
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 const append = (out, str) => {
-  fs.writeSync(out, str + "\n")
-}
+  fs.writeSync(out, str + "\n");
+};
 
 const appendNoNewline = (out, str) => {
-  fs.writeSync(out, str)
-}
+  fs.writeSync(out, str);
+};
 
 async function generateBlockchainNetworks(networks, networkFilePath) {
-  const networkFile = fs.openSync(networkFilePath, 'w')
+  const networkFile = fs.openSync(networkFilePath, "w");
 
   for (let ni = 0; ni < networks.length; ni++) {
-    const network = networks[ni]
+    const network = networks[ni];
 
-    const { chainId, name } = network
+    const { chainId, name } = network;
 
-    console.log(chalk.yellow(`Generating network ${name}...`))
+    console.log(chalk.yellow(`Generating network ${name}...`));
 
-    append(networkFile, `# ${capitalizeFirstLetter(name)}`)
-    append(networkFile, '')
+    append(networkFile, `# ${capitalizeFirstLetter(name)}`);
+    append(networkFile, "");
 
     const newContractSection = () => {
-      append(networkFile, `| Contract | Address | Artifact |`)
-      append(networkFile, `| :--- | :--- | :--- |`)
-    }
-    
+      append(networkFile, `| Contract | Address | Artifact |`);
+      append(networkFile, `| :--- | :--- | :--- |`);
+    };
+
     let currentPoolDataContracts = [
-      { name: 'Dai Prize Pool', addressPath: 'dai.prizePool' },
-      { name: 'Dai Prize Strategy', addressPath: 'dai.prizeStrategy' },
-      { name: 'Dai POOL Faucet', addressPath: 'daiFaucet' },
-      { name: 'UNI Prize Pool', addressPath: 'uni.prizePool' },
-      { name: 'UNI Prize Strategy', addressPath: 'uni.prizeStrategy' },
-      { name: 'UNI POOL Faucet', addressPath: 'uniFaucet' },
-      { name: 'USDC Prize Pool', addressPath: 'usdc.prizePool' },
-      { name: 'USDC Prize Strategy', addressPath: 'usdc.prizeStrategy' },
-      { name: 'USDC POOL Faucet', addressPath: 'usdcFaucet' },
-      { name: 'COMP Prize Pool', addressPath: 'comp.prizePool' },
-      { name: 'COMP Prize Strategy', addressPath: 'comp.prizeStrategy' },
-      { name: 'COMP POOL Faucet', addressPath: 'compFaucet' },
-      { name: 'BAT Prize Pool', addressPath: 'bat.prizePool' },
-      { name: 'BAT Prize Strategy', addressPath: 'bat.prizeStrategy' },
-      { name: 'POOL Prize Pool', addressPath: 'pool.prizePool' },
-      { name: 'POOL Prize Strategy', addressPath: 'pool.prizeStrategy' },
-      { name: 'POOL POOL Faucet', addressPath: 'poolPoolFaucet' },
-      { name: 'Loot Box ERC721', addressPath: 'lootBox' },
-      { name: 'Loot Box Prize Strategy Listener', addressPath: 'lootBoxPrizeStrategyListener' },
-      { name: 'Aave USDT Prize Pool', addressPath: 'aaveUsdt.prizePool' },
-      { name: 'Aave USDT Prize Strategy', addressPath: 'aaveUsdt.prizeStrategy' },
-      { name: 'USDT Prize Pool', addressPath: 'usdt.prizePool' },
-      { name: 'USDT Prize Strategy', addressPath: 'usdt.prizeStrategy' },
-      { name: 'USDT Token Faucet', addressPath: 'usdt.tokenFaucet' },
-      { name: 'Uniswap POOL LP Prize Pool', addressPath: 'uniswapPoolEth.prizePool' },
-      { name: 'Uniswap POOL LP Faucet', addressPath: 'uniswapPoolEthFaucet' },
-      { name: 'Reserve Registry', addressPath: 'reserveRegistry'}
-    ]
+      { name: "Dai Prize Pool", addressPath: "dai.prizePool" },
+      { name: "Dai Prize Strategy", addressPath: "dai.prizeStrategy" },
+      { name: "Dai POOL Faucet", addressPath: "daiFaucet" },
+      { name: "Dai Pod", addressPath: "dai.pod" },
+      { name: "UNI Prize Pool", addressPath: "uni.prizePool" },
+      { name: "UNI Prize Strategy", addressPath: "uni.prizeStrategy" },
+      { name: "UNI POOL Faucet", addressPath: "uniFaucet" },
+      { name: "USDC Prize Pool", addressPath: "usdc.prizePool" },
+      { name: "USDC Prize Strategy", addressPath: "usdc.prizeStrategy" },
+      { name: "USDC POOL Faucet", addressPath: "usdcFaucet" },
+      { name: "USDC Pod", addressPath: "usdc.pod" },
+      { name: "COMP Prize Pool", addressPath: "comp.prizePool" },
+      { name: "COMP Prize Strategy", addressPath: "comp.prizeStrategy" },
+      { name: "COMP POOL Faucet", addressPath: "compFaucet" },
+      { name: "BAT Prize Pool", addressPath: "bat.prizePool" },
+      { name: "BAT Prize Strategy", addressPath: "bat.prizeStrategy" },
+      { name: "POOL Prize Pool", addressPath: "pool.prizePool" },
+      { name: "POOL Prize Strategy", addressPath: "pool.prizeStrategy" },
+      { name: "POOL POOL Faucet", addressPath: "poolPoolFaucet" },
+      { name: "Loot Box ERC721", addressPath: "lootBox" },
+      {
+        name: "Loot Box Prize Strategy Listener",
+        addressPath: "lootBoxPrizeStrategyListener",
+      },
+      { name: "Aave USDT Prize Pool", addressPath: "aaveUsdt.prizePool" },
+      {
+        name: "Aave USDT Prize Strategy",
+        addressPath: "aaveUsdt.prizeStrategy",
+      },
+      { name: "USDT Prize Pool", addressPath: "usdt.prizePool" },
+      { name: "USDT Prize Strategy", addressPath: "usdt.prizeStrategy" },
+      { name: "USDT Token Faucet", addressPath: "usdt.tokenFaucet" },
+      {
+        name: "Uniswap POOL LP Prize Pool",
+        addressPath: "uniswapPoolEth.prizePool",
+      },
+      { name: "Uniswap POOL LP Faucet", addressPath: "uniswapPoolEthFaucet" },
+      { name: "Reserve Registry", addressPath: "reserveRegistry" },
+    ];
 
-    const { contractAddresses } = require('@pooltogether/current-pool-data')
+    const { contractAddresses } = require("@pooltogether/current-pool-data");
     if (contractAddresses[chainId]) {
-      append(networkFile, `## PoolTogether Pools & Supporting Contracts`)
-      append(networkFile, `**@pooltogether/current-pool-data ${packageJson.dependencies['@pooltogether/current-pool-data']} [npm](https://www.npmjs.com/package/@pooltogether/current-pool-data)**`)
-      append(networkFile, `| Contract | Address |`)
-      append(networkFile, `| :--- | :--- |`)
+      append(networkFile, `## PoolTogether Pools & Supporting Contracts`);
+      append(
+        networkFile,
+        `**@pooltogether/current-pool-data ${packageJson.dependencies["@pooltogether/current-pool-data"]} [npm](https://www.npmjs.com/package/@pooltogether/current-pool-data)**`
+      );
+      append(networkFile, `| Contract | Address |`);
+      append(networkFile, `| :--- | :--- |`);
 
-      currentPoolDataContracts.forEach(contract => {
-        const address = get(contractAddresses[chainId], contract.addressPath)
+      currentPoolDataContracts.forEach((contract) => {
+        const address = get(contractAddresses[chainId], contract.addressPath);
         if (address) {
-          appendNoNewline(networkFile, `| `)
-          appendNoNewline(networkFile, `${contract.name}`)
-          append(networkFile, ` | [${address}](${formatAddressUrl(network, address)}) |`)
+          appendNoNewline(networkFile, `| `);
+          appendNoNewline(networkFile, `${contract.name}`);
+          append(
+            networkFile,
+            ` | [${address}](${formatAddressUrl(network, address)}) |`
+          );
         }
-      })
+      });
     }
-    append(networkFile, '')
+    append(networkFile, "");
 
     function appendPackage({ name, npmPackageName, githubBaseUrl }) {
-      const deployments = formatDeployments({ npmPackageName, ignoreContracts, network, githubBaseUrl })
+      const deployments = formatDeployments({
+        npmPackageName,
+        ignoreContracts,
+        network,
+        githubBaseUrl,
+      });
       if (deployments.length) {
-        append(networkFile, `## ${name}`)
-        append(networkFile, `**${npmPackageName} ${packageJson.dependencies[npmPackageName]} [npm](https://www.npmjs.com/package/${npmPackageName})**`)
-        newContractSection()
-        append(networkFile, deployments.join('\n'))
-        append(networkFile, '')
+        append(networkFile, `## ${name}`);
+        append(
+          networkFile,
+          `**${npmPackageName} ${packageJson.dependencies[npmPackageName]} [npm](https://www.npmjs.com/package/${npmPackageName})**`
+        );
+        newContractSection();
+        append(networkFile, deployments.join("\n"));
+        append(networkFile, "");
       }
     }
 
     appendPackage({
-      name: 'Builders',
-      npmPackageName: '@pooltogether/pooltogether-contracts',
-      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-pool-contracts/tree/master'
-    })
+      name: "Builders",
+      npmPackageName: "@pooltogether/pooltogether-contracts",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-pool-contracts/tree/master",
+    });
 
     appendPackage({
-      name: 'Governance',
-      npmPackageName: '@pooltogether/governance',
-      githubBaseUrl: 'https://github.com/pooltogether/governance/tree/main'
-    })
+      name: "Governance",
+      npmPackageName: "@pooltogether/governance",
+      githubBaseUrl: "https://github.com/pooltogether/governance/tree/main",
+    });
 
     appendPackage({
-      name: 'RNG Contracts',
-      npmPackageName: '@pooltogether/pooltogether-rng-contracts',
-      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-rng-contracts/tree/master'
-    })
+      name: "RNG Contracts",
+      npmPackageName: "@pooltogether/pooltogether-rng-contracts",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-rng-contracts/tree/master",
+    });
 
     appendPackage({
-      name: 'Loot Box Contracts',
-      npmPackageName: '@pooltogether/loot-box',
-      githubBaseUrl: 'https://github.com/pooltogether/loot-box/tree/main'
-    })
+      name: "Loot Box Contracts",
+      npmPackageName: "@pooltogether/loot-box",
+      githubBaseUrl: "https://github.com/pooltogether/loot-box/tree/main",
+    });
 
     appendPackage({
-      name: 'Retroactive Token Distribution',
-      npmPackageName: '@pooltogether/merkle-distributor',
-      githubBaseUrl: 'https://github.com/pooltogether/merkle-distributor/tree/main'
-    })
-    
-    appendPackage({
-      name: 'Generic Proxy Factory',
-      npmPackageName: '@pooltogether/pooltogether-proxy-factory',
-      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-proxy-factory/tree/main'
-    })
+      name: "Retroactive Token Distribution",
+      npmPackageName: "@pooltogether/merkle-distributor",
+      githubBaseUrl:
+        "https://github.com/pooltogether/merkle-distributor/tree/main",
+    });
 
     appendPackage({
-      name: 'Generic Address Registry',
-      npmPackageName: '@pooltogether/pooltogether-generic-registry',
-      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-generic-registry/tree/main'
-    })
+      name: "Generic Proxy Factory",
+      npmPackageName: "@pooltogether/pooltogether-proxy-factory",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-proxy-factory/tree/main",
+    });
 
     appendPackage({
-      name: 'Prize Pool Registry',
-      npmPackageName: '@pooltogether/pooltogether-prizepool-registry',
-      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-prizepool-registry/tree/main'
-    })
+      name: "Generic Address Registry",
+      npmPackageName: "@pooltogether/pooltogether-generic-registry",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-generic-registry/tree/main",
+    });
 
     appendPackage({
-      name: 'Pods Registry',
-      npmPackageName: '@pooltogether/pooltogether-pods-registry',
-      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-prizepool-registry/tree/main'
-    })
-
-    
-    appendPackage({
-      name: 'Prize Strategy Upkeep',
-      npmPackageName: '@pooltogether/pooltogether-prizestrategy-upkeep',
-      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-prizestrategy-upkeep/tree/main'
-    })
+      name: "Prize Pool Registry",
+      npmPackageName: "@pooltogether/pooltogether-prizepool-registry",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-prizepool-registry/tree/main",
+    });
 
     appendPackage({
-      name: 'Pods Upkeep',
-      npmPackageName: '@pooltogether/pooltogether-pods-upkeep',
-      githubBaseUrl: 'https://github.com/pooltogether/pooltogether-pods-upkeep/tree/master'
-    })
-
+      name: "Pods Registry",
+      npmPackageName: "@pooltogether/pooltogether-pods-registry",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-prizepool-registry/tree/main",
+    });
 
     appendPackage({
-      name: 'Aave Yield Source',
-      npmPackageName: '@pooltogether/aave-yield-source',
-      githubBaseUrl: 'https://github.com/pooltogether/aave-yield-source/tree/main'
-    })
+      name: "Prize Strategy Upkeep",
+      npmPackageName: "@pooltogether/pooltogether-prizestrategy-upkeep",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-prizestrategy-upkeep/tree/main",
+    });
 
+    appendPackage({
+      name: "Pods Upkeep",
+      npmPackageName: "@pooltogether/pooltogether-pods-upkeep",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-pods-upkeep/tree/master",
+    });
 
-    console.log(chalk.green(`Done ${name}!`))
-    append(networkFile, '')
+    appendPackage({
+      name: "Aave Yield Source",
+      npmPackageName: "@pooltogether/aave-yield-source",
+      githubBaseUrl:
+        "https://github.com/pooltogether/aave-yield-source/tree/main",
+    });
+
+    console.log(chalk.green(`Done ${name}!`));
+    append(networkFile, "");
   }
 
-  fs.closeSync(networkFile)
+  fs.closeSync(networkFile);
 }
 
 async function generate() {
-  console.log(chalk.dim(`Generating network files...`))
+  console.log(chalk.dim(`Generating network files...`));
 
   // The output directory of all files
-  const outputDir = './networks'
-  await fsPromises.mkdir(outputDir, { recursive: true })
+  const outputDir = "./networks";
+  await fsPromises.mkdir(outputDir, { recursive: true });
 
   const ethereumNetworks = [
     {
-      chainId: '1',
-      name: 'mainnet'
+      chainId: "1",
+      name: "mainnet",
     },
     {
-      chainId: '4',
-      name: 'rinkeby'
+      chainId: "4",
+      name: "rinkeby",
     },
     {
-      chainId: '42',
-      name: 'kovan'
-    }
-  ]
+      chainId: "42",
+      name: "kovan",
+    },
+  ];
 
   const xDaiNetworks = [
     {
-      chainId: '100',
-      name: 'xDai',
-      hardhatNetworkName: 'xdai'
+      chainId: "100",
+      name: "xDai",
+      hardhatNetworkName: "xdai",
     },
     {
-      chainId: '77',
-      name: 'sokol',
-      hardhatNetworkName: 'poaSokol'
-    }
-  ]
+      chainId: "77",
+      name: "sokol",
+      hardhatNetworkName: "poaSokol",
+    },
+  ];
 
   const maticNetworks = [
     {
       chainId: 137,
-      name: 'matic'
+      name: "matic",
     },
     {
       chainId: 80001,
-      name: 'mumbai'
-    }
-  ]
+      name: "mumbai",
+    },
+  ];
 
   const binanceNetworks = [
     {
       chainId: 56,
-      name: 'BSC',
-      hardhatNetworkName: 'bsc'
+      name: "BSC",
+      hardhatNetworkName: "bsc",
     },
     {
       chainId: 97,
-      name: 'BSC Testnet',
-      hardhatNetworkName: 'bscTestnet'
-    }
-  ]
+      name: "BSC Testnet",
+      hardhatNetworkName: "bscTestnet",
+    },
+  ];
 
-  await generateBlockchainNetworks(ethereumNetworks, `./networks/ethereum.md`)
-  await generateBlockchainNetworks(xDaiNetworks, `./networks/xdai.md`)
-  await generateBlockchainNetworks(maticNetworks, `./networks/matic.md`)
-  await generateBlockchainNetworks(binanceNetworks, `./networks/binance.md`)
+  await generateBlockchainNetworks(ethereumNetworks, `./networks/ethereum.md`);
+  await generateBlockchainNetworks(xDaiNetworks, `./networks/xdai.md`);
+  await generateBlockchainNetworks(maticNetworks, `./networks/matic.md`);
+  await generateBlockchainNetworks(binanceNetworks, `./networks/binance.md`);
 
-  console.log(chalk.green(`Done!`))
+  console.log(chalk.green(`Done!`));
 }
 
-generate()
+generate();
