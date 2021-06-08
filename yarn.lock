@@ -390,6 +390,19 @@
     deploy-eip-1820 "1.0.0"
     sortition-sum-tree-factory "0.1.0"
 
+"@pooltogether/pooltogether-contracts@3.3.7":
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.3.7.tgz#1bf49ce5b85546af0cd91556dcf418456d918e93"
+  integrity sha512-B7iAWvJkEPubZdBN8dY5oiaAYA34in0mzV91opzoEZ9xP+VS16X3gGkdEj7r5K0iP7vvA7ZDTH3t4jEYpbmnYg==
+  dependencies:
+    "@openzeppelin/contracts-upgradeable" "3.4.0"
+    "@pooltogether/fixed-point" "1.0.0-beta.2"
+    "@pooltogether/pooltogether-rng-contracts" "1.0.0"
+    "@pooltogether/uniform-random-number" "1.0.0-beta.1"
+    "@pooltogether/yield-source-interface" "^1.0.1"
+    deploy-eip-1820 "1.0.0"
+    sortition-sum-tree-factory "0.1.0"
+
 "@pooltogether/pooltogether-contracts@^3.0.1":
   version "3.3.9"
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.3.9.tgz#fd844258d343eda8de2f7ce298d08518de7cd6fb"
@@ -464,6 +477,14 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-rng-contracts/-/pooltogether-rng-contracts-1.2.0.tgz#f7a6989cb5578c56f72c6f21bcc5c5a5c5ede3a8"
   integrity sha512-oLbYjSbXsR2P+r/wYGxmfPSvWFHikT0D9ykOlPQ/Kq63gecgfskUTDUoEVvp0ryK2f8MtFNb81RdqEQLQOcyDw==
+
+"@pooltogether/pooltogether-sushi-yield-source@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-sushi-yield-source/-/pooltogether-sushi-yield-source-1.0.0.tgz#aac2a47ad8aa3290ddedc9e5e9e8fe4e382e1581"
+  integrity sha512-BPlswJHNBoMq8dY+NkigkUDuCeH3xGlgohfBnu4C4JA5ar2BNIxgUGINU3eqnOKjdLEyjMlbOTPGLVrRFVCURQ==
+  dependencies:
+    "@pooltogether/pooltogether-contracts" "3.3.7"
+    "@pooltogether/yield-source-interface" "^1.0.1"
 
 "@pooltogether/uniform-random-number@1.0.0-beta.1":
   version "1.0.0-beta.1"

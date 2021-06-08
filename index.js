@@ -221,6 +221,13 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
     });
 
     appendPackage({
+      name: "Sushi Yield Source",
+      npmPackageName: "@pooltogether/pooltogether-sushi-yield-source",
+      githubBaseUrl:
+        "https://github.com/pooltogether/sushi-pooltogether/tree/master",
+    });
+
+    appendPackage({
       name: "PoolTogether EVM Bridge",
       npmPackageName: "@pooltogether/pooltogether-evm-bridge",
       githubBaseUrl:
