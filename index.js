@@ -220,6 +220,13 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
         "https://github.com/pooltogether/aave-yield-source/tree/main",
     });
 
+    appendPackage({
+      name: "PoolTogether EVM Bridge",
+      npmPackageName: "@pooltogether/pooltogether-evm-bridge",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-evm-bridge/tree/master",
+    });
+
     console.log(chalk.green(`Done ${name}!`));
     append(networkFile, "");
   }
