@@ -93,6 +93,7 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       },
       { name: "Uniswap POOL LP Faucet", addressPath: "uniswapPoolEthFaucet" },
       { name: "Reserve Registry", addressPath: "reserveRegistry" },
+      { name: "Pod Factory", addressPath: "podFactory" },
     ];
 
     const { contractAddresses } = require("@pooltogether/current-pool-data");
