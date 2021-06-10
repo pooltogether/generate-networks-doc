@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@pooltogether/aave-yield-source": "^1.0.3",
-    "@pooltogether/current-pool-data": "pooltogether/current-pool-data#master",
+    "@pooltogether/current-pool-data": "^3.4.20",
     "@pooltogether/governance": "^1.0.1",
     "@pooltogether/loot-box": "^1.1.0",
     "@pooltogether/merkle-distributor": "^1.0.2",
