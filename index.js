@@ -149,6 +149,13 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
     }
 
     appendPackage({
+      name: "Configurable Reserve",
+      npmPackageName: "@pooltogether/configurable-reserve-contracts",
+      githubBaseUrl:
+        "https://github.com/pooltogether/pooltogether-reserve-contracts/tree/master",
+    });
+
+    appendPackage({
       name: "Builders",
       npmPackageName: "@pooltogether/pooltogether-contracts",
       githubBaseUrl:

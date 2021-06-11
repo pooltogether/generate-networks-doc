@@ -334,6 +334,11 @@
     "@pooltogether/fixed-point" "1.0.0"
     "@pooltogether/yield-source-interface" "1.0.1"
 
+"@pooltogether/configurable-reserve-contracts@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@pooltogether/configurable-reserve-contracts/-/configurable-reserve-contracts-1.1.0.tgz#2fc91efefb68c9bade013b1b4da03a64d91c50db"
+  integrity sha512-8knRPpQRWqmbXmWj/ZgISghr8Elbwg3Oi+ktqT1eBR8WQt41zjwkK5WPGNf4TSXOt7+CwFURAG552euoDCDGFQ==
+
 "@pooltogether/current-pool-data@^3.4.20":
   version "3.4.20"
   resolved "https://registry.yarnpkg.com/@pooltogether/current-pool-data/-/current-pool-data-3.4.20.tgz#c18dc3bb375a2beebf22b6a7f829e52b905fd3c7"
