@@ -462,10 +462,10 @@
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-prizepool-registry/-/pooltogether-prizepool-registry-1.0.1.tgz#7f1da45b0a90588d1a1e2e9991d35a3978c381f4"
   integrity sha512-tIS54Q2IiLGyOpMF2xE6bPWk1Kwj6X9QBNRx4SPNXaqubt/TMWXEw95kQsuB2sP3WMBG3iFbY/GJMeq9toMEPQ==
 
-"@pooltogether/pooltogether-prizestrategy-upkeep@^1.0.0":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-prizestrategy-upkeep/-/pooltogether-prizestrategy-upkeep-1.0.4.tgz#177b729e38c63ba0064cacf654ba6c61dc297b88"
-  integrity sha512-2obx3FT3tASj4jnslJlQyv4sdDaAR0KKtuSt3i54XQK7oSMTATTh7T/+y+SNimoM6CBY6deKM6rD+EJ7L3DH/w==
+"@pooltogether/pooltogether-prizestrategy-upkeep@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-prizestrategy-upkeep/-/pooltogether-prizestrategy-upkeep-1.0.6.tgz#089c05f41d228619aa57346bd54dee3a5f32ab08"
+  integrity sha512-zXrwDq8l4d6QQUG3FYW9sm9aapsDZsDw3z1zyx9JSSZLMhneYN8oVAgh6X+0j6+mmMqZ9GOoylnr6jfCNLgXsQ==
 
 "@pooltogether/pooltogether-proxy-factory@^1.0.0.beta.3":
   version "1.0.0-beta.3"

@@ -23,7 +23,7 @@
     "@pooltogether/pooltogether-pods-registry": "^1.0.0",
     "@pooltogether/pooltogether-pods-upkeep": "^1.0.1",
     "@pooltogether/pooltogether-prizepool-registry": "^1.0.1",
-    "@pooltogether/pooltogether-prizestrategy-upkeep": "^1.0.0",
+    "@pooltogether/pooltogether-prizestrategy-upkeep": "^1.0.6",
     "@pooltogether/pooltogether-proxy-factory": "^1.0.0.beta.3",
     "@pooltogether/pooltogether-rng-contracts": "^1.2.0",
     "@pooltogether/pooltogether-sushi-yield-source": "^1.0.0",
