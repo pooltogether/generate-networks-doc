@@ -247,10 +247,17 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
     });
 
     appendPackage({
-      name: "PoolTogether EVM Bridge",
+      name: "EVM Bridge",
       npmPackageName: "@pooltogether/pooltogether-evm-bridge",
       githubBaseUrl:
         "https://github.com/pooltogether/pooltogether-evm-bridge/tree/master",
+    });
+
+    appendPackage({
+      name: "Multi Token Listener",
+      npmPackageName: "@pooltogether/multi-token-listener",
+      githubBaseUrl:
+        "https://github.com/pooltogether/multi-token-listener/tree/master",
     });
 
     console.log(chalk.green(`Done ${name}!`));
