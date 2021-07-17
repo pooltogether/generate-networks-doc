@@ -442,6 +442,19 @@
     deploy-eip-1820 "1.0.0"
     sortition-sum-tree-factory "0.1.0"
 
+"@pooltogether/pooltogether-contracts@^3.4.3":
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.4.3.tgz#f3a8f16bd14b1c9a09f225e916ae0b5b2597a7c9"
+  integrity sha512-gW6nBBZ4cMb12uqutyXCovVJ4UedMBSyrvxb6jBPobGXK161M+4yGcOAxF+Pl0mQ1kJYV5XxADRVvBtHgWtOWQ==
+  dependencies:
+    "@openzeppelin/contracts-upgradeable" "3.4.0"
+    "@pooltogether/fixed-point" "1.0.0-beta.2"
+    "@pooltogether/pooltogether-rng-contracts" "1.0.0"
+    "@pooltogether/uniform-random-number" "1.0.0-beta.1"
+    "@pooltogether/yield-source-interface" "^1.0.1"
+    deploy-eip-1820 "1.0.0"
+    sortition-sum-tree-factory "0.1.0"
+
 "@pooltogether/pooltogether-evm-bridge@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-evm-bridge/-/pooltogether-evm-bridge-1.0.0.tgz#d818d72c764ecc6bfbf5ffa2a718662a1994fda9"

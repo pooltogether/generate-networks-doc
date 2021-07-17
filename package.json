@@ -18,7 +18,7 @@
     "@pooltogether/merkle-distributor": "^1.0.2",
     "@pooltogether/migrate-v3": "^0.1.3",
     "@pooltogether/multi-token-listener": "^1.1.0",
-    "@pooltogether/pooltogether-contracts": "^3.3.10",
+    "@pooltogether/pooltogether-contracts": "^3.4.3",
     "@pooltogether/pooltogether-evm-bridge": "^1.0.0",
     "@pooltogether/pooltogether-generic-registry": "^1.0.9",
     "@pooltogether/pooltogether-pods-registry": "^1.0.0",
