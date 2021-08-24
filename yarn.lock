@@ -442,9 +442,10 @@
     deploy-eip-1820 "1.0.0"
     sortition-sum-tree-factory "0.1.0"
 
-"@pooltogether/pooltogether-contracts@github:pooltogether/pooltogether-pool-contracts":
+"@pooltogether/pooltogether-contracts@^3.4.5":
   version "3.4.5"
-  resolved "https://codeload.github.com/pooltogether/pooltogether-pool-contracts/tar.gz/1b1b8c724ce476e308eb4601a9eee4b68e557c7c"
+  resolved "https://registry.yarnpkg.com/@pooltogether/pooltogether-contracts/-/pooltogether-contracts-3.4.5.tgz#b9e80516d6a256564c6979939bc84933794f8cf4"
+  integrity sha512-Y0Nj8zWurDG1bZS3vWlF+0wZHdHdbhPi0KvoUTh0OYKqYW6MQkhVck+1CrRjExGZRnYvIjX2o/g3eqJGTSPOiQ==
   dependencies:
     "@openzeppelin/contracts-upgradeable" "3.4.0"
     "@pooltogether/fixed-point" "1.0.0-beta.2"
