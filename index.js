@@ -54,7 +54,7 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       append(networkFile, `| :--- | :--- | :--- |`);
     };
 
-    let currentPoolDataContracts = [
+    let contractAddressSelection = [
       { name: "Dai Prize Pool", addressPath: "dai.prizePool" },
       { name: "Dai Prize Strategy", addressPath: "dai.prizeStrategy" },
       { name: "Dai POOL Faucet", addressPath: "daiFaucet" },
@@ -107,7 +107,10 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       { name: "Pod Factory", addressPath: "podFactory" },
     ];
 
-    const { contractAddresses } = require("@pooltogether/current-pool-data");
+    const {
+      contractAddresses,
+      prizePoolContracts
+    } = require("@pooltogether/current-pool-data");
     if (contractAddresses[chainId]) {
       append(networkFile, `## PoolTogether Pools & Supporting Contracts`);
       append(
@@ -117,7 +120,7 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       append(networkFile, `| Contract | Address |`);
       append(networkFile, `| :--- | :--- |`);
 
-      currentPoolDataContracts.forEach((contract) => {
+      contractAddressSelection.forEach((contract) => {
         const address = get(contractAddresses[chainId], contract.addressPath);
         if (address) {
           appendNoNewline(networkFile, `| `);
@@ -326,10 +329,24 @@ async function generate() {
     },
   ];
 
+  const celoNetworks = [
+    {
+      chainId: 42220,
+      name: "Celo",
+      hardhatNetworkName: 'celo'
+    },
+    {
+      chainId: 44787,
+      name: 'Alfajores',
+      hardhatNetworkName: 'celoTestnet'
+    }
+  ]
+
   await generateBlockchainNetworks(ethereumNetworks, `./networks/ethereum.md`);
   await generateBlockchainNetworks(xDaiNetworks, `./networks/xdai.md`);
   await generateBlockchainNetworks(maticNetworks, `./networks/matic.md`);
   await generateBlockchainNetworks(binanceNetworks, `./networks/binance.md`);
+  await generateBlockchainNetworks(celoNetworks, './networks/celo.md');
 
   console.log(chalk.green(`Done!`));
 }

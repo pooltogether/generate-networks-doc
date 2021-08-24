@@ -16,10 +16,13 @@ function formatAddressUrl(network, address) {
     url = `https://explorer-mainnet.maticvigil.com/address/${address}`
   } else if (chainId == 80001) {
     url = `https://explorer-mumbai.maticvigil.com/address/${address}`
+  } else if (chainId == 42220) {
+    url = `https://explorer.celo.org/address/${address}`
+  } else if (chainId == 44787) {
+    url = `https://alfajores-blockscout.celo-testnet.org/address/${address}`
   } else {
     url = `https://${name}.etherscan.io/address/${address}`
   }
-
   return url
 }
 
