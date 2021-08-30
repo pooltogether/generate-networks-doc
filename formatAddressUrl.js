@@ -13,7 +13,7 @@ function formatAddressUrl(network, address) {
   } else if (chainId == 100) {
     url = `https://blockscout.com/xdai/mainnet/address/${address}`
   } else if (chainId == 137) {
-    url = `https://explorer-mainnet.maticvigil.com/address/${address}`
+    url = `https://polygonscan.com/address/${address}`
   } else if (chainId == 80001) {
     url = `https://explorer-mumbai.maticvigil.com/address/${address}`
   } else if (chainId == 42220) {

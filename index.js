@@ -105,6 +105,10 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       { name: "Uniswap POOL LP Faucet", addressPath: "uniswapPoolEthFaucet" },
       { name: "Reserve Registry", addressPath: "reserveRegistry" },
       { name: "Pod Factory", addressPath: "podFactory" },
+      { name: "cUSD Prize Pool", addressPath: "cusd.prizePool" },
+      { name: "cUSD Prize Strategy", addressPath: "cusd.prizeStrategy" },
+      { name: "cEUR Prize Pool", addressPath: "ceur.prizePool" },
+      { name: "cEUR Prize Pool", addressPath: "ceur.prizeStrategy" },
     ];
 
     const {

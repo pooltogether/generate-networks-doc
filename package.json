@@ -12,7 +12,7 @@
   "dependencies": {
     "@pooltogether/aave-yield-source": "^1.0.3",
     "@pooltogether/configurable-reserve-contracts": "^1.1.0",
-    "@pooltogether/current-pool-data": "^3.5.17",
+    "@pooltogether/current-pool-data": "^3.6.1",
     "@pooltogether/governance": "^1.0.1",
     "@pooltogether/loot-box": "^1.1.0",
     "@pooltogether/merkle-distributor": "^1.0.2",
