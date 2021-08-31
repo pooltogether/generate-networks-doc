@@ -108,7 +108,7 @@ async function generateBlockchainNetworks(networks, networkFilePath) {
       { name: "cUSD Prize Pool", addressPath: "cusd.prizePool" },
       { name: "cUSD Prize Strategy", addressPath: "cusd.prizeStrategy" },
       { name: "cEUR Prize Pool", addressPath: "ceur.prizePool" },
-      { name: "cEUR Prize Pool", addressPath: "ceur.prizeStrategy" },
+      { name: "cEUR Prize Strategy", addressPath: "ceur.prizeStrategy" },
     ];
 
     const {
